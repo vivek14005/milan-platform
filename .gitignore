@@ -12,4 +12,7 @@ node_modules/
 
 # OS
 .DS_Store
-Thumbs.db
+Thumbs.db.venv/
+dist/
+backend/uploads/
+milan-wedding-marketplace/

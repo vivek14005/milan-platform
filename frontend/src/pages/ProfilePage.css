@@ -1,0 +1,1266 @@
+/* =========================================================
+   PREMIUM MILAN PROFILE PAGE
+========================================================= */
+
+.premium-profile-page {
+  min-height: 100vh;
+
+  padding:
+    34px 40px 70px;
+
+  background:
+    radial-gradient(circle at 10% 10%,
+      rgba(194, 65, 108, 0.08),
+      transparent 24%),
+    radial-gradient(circle at 90% 10%,
+      rgba(218, 173, 91, 0.09),
+      transparent 25%),
+    #fffdfb;
+
+  color: #291f22;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.premium-profile-header {
+  width:
+    min(1360px,
+      100%);
+
+  margin:
+    0 auto 32px;
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+  gap: 30px;
+}
+
+.profile-eyebrow {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #c49447;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 4px;
+}
+
+.premium-profile-header h1 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(40px,
+      5vw,
+      58px);
+
+  line-height: 1;
+
+  color: #33262b;
+}
+
+.premium-profile-header p {
+  margin-top: 15px;
+
+  color: #84767b;
+
+  font-size: 15px;
+}
+
+.profile-home-btn {
+  margin-top: 10px;
+
+  padding:
+    13px 22px;
+
+  border:
+    1px solid #ba365f;
+
+  border-radius: 12px;
+
+  background: white;
+
+  color: #a72e57;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    0.2s ease;
+}
+
+.profile-home-btn:hover {
+  background: #a72e57;
+
+  color: white;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.premium-profile-layout {
+  width:
+    min(1360px,
+      100%);
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    300px minmax(0,
+      1fr);
+
+  gap: 34px;
+
+  align-items:
+    start;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.premium-profile-sidebar {
+  padding:
+    34px 26px;
+
+  border:
+    1px solid #f0dfe4;
+
+  border-radius: 22px;
+
+  background:
+    rgba(255,
+      255,
+      255,
+      0.94);
+
+  box-shadow:
+    0 18px 45px rgba(96,
+      38,
+      57,
+      0.08);
+
+  text-align: center;
+}
+
+.profile-avatar-wrap {
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-bottom: 20px;
+}
+
+.profile-avatar-wrap::before,
+.profile-avatar-wrap::after {
+  content: "❀";
+
+  position: absolute;
+
+  top: 35px;
+
+  color:
+    rgba(197,
+      56,
+      98,
+      0.18);
+
+  font-size: 42px;
+}
+
+.profile-avatar-wrap::before {
+  left: 20px;
+
+  transform:
+    rotate(-20deg);
+}
+
+.profile-avatar-wrap::after {
+  right: 20px;
+
+  transform:
+    rotate(20deg);
+}
+
+.profile-avatar-main {
+  position: relative;
+
+  z-index: 2;
+
+  width: 112px;
+
+  height: 112px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    4px solid white;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(145deg,
+      #b0174a,
+      #ca2f69);
+
+  color: white;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 52px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 14px 30px rgba(158,
+      35,
+      74,
+      0.22);
+}
+
+.premium-profile-sidebar h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 28px;
+
+  color: #382b30;
+}
+
+.profile-sidebar-email {
+  margin-top: 7px;
+
+  color: #776a6f;
+
+  font-size: 13px;
+}
+
+.profile-customer-badge {
+  display: inline-block;
+
+  margin-top: 18px;
+
+  padding:
+    9px 18px;
+
+  border-radius: 30px;
+
+  background: #fde8ee;
+
+  color: #aa2d56;
+
+  font-size: 11px;
+
+  font-weight: 800;
+}
+
+.profile-side-divider {
+  height: 1px;
+
+  margin: 28px 0;
+
+  background: #efe4e7;
+}
+
+.profile-user-id-box span {
+  display: block;
+
+  color: #83757a;
+
+  font-size: 12px;
+}
+
+.profile-user-id-box strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #b92758;
+
+  font-size: 17px;
+}
+
+.profile-tip-card {
+  margin-top: 28px;
+
+  padding:
+    22px;
+
+  border:
+    1px solid #f3e0e6;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(145deg,
+      #fffdfc,
+      #fff8fa);
+
+  text-align: left;
+}
+
+.profile-tip-icon {
+  margin-bottom: 10px;
+
+  color: #bd305e;
+
+  font-size: 22px;
+}
+
+.profile-tip-card h3 {
+  margin-bottom: 10px;
+
+  color: #a82753;
+
+  font-size: 15px;
+}
+
+.profile-tip-card p {
+  margin: 0;
+
+  color: #75686d;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   MAIN FORM CARD
+========================================================= */
+
+.premium-profile-main {
+  min-width: 0;
+}
+
+.premium-profile-form {
+  padding:
+    38px 32px 28px;
+
+  border:
+    1px solid #efe2e6;
+
+  border-radius: 20px;
+
+  background: white;
+
+  box-shadow:
+    0 18px 45px rgba(79,
+      31,
+      48,
+      0.07);
+}
+
+.profile-form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,
+      minmax(0,
+        1fr));
+
+  gap:
+    28px 24px;
+}
+
+.premium-field {
+  display: flex;
+
+  flex-direction:
+    column;
+
+  gap: 9px;
+}
+
+.premium-field-full {
+  grid-column:
+    1 / -1;
+}
+
+.premium-field label {
+  color: #2f2528;
+
+  font-size: 13px;
+
+  font-weight: 800;
+}
+
+.premium-input-wrap {
+  min-height: 54px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding:
+    0 15px;
+
+  border:
+    1px solid #dfd2d6;
+
+  border-radius: 11px;
+
+  background: #fffdfc;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.premium-input-wrap:focus-within {
+  border-color:
+    #bd3762;
+
+  box-shadow:
+    0 0 0 3px rgba(189,
+      55,
+      98,
+      0.08);
+}
+
+.premium-input-wrap span {
+  flex-shrink: 0;
+
+  color: #bb315d;
+
+  font-size: 17px;
+}
+
+.premium-input-wrap input {
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #2f2528;
+
+  font-size: 14px;
+}
+
+.premium-input-wrap.disabled {
+  background: #f6f4f4;
+}
+
+.premium-input-wrap.disabled span {
+  color: #999;
+}
+
+.premium-input-wrap.disabled input {
+  color: #999;
+}
+
+.premium-field small {
+  color: #8c7f84;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.profile-form-footer {
+  margin-top: 32px;
+
+  padding-top: 26px;
+
+  border-top:
+    1px solid #eee3e6;
+
+  display: flex;
+
+  justify-content:
+    flex-end;
+
+  gap: 14px;
+}
+
+.profile-cancel-premium,
+.profile-save-premium {
+  min-width: 130px;
+
+  min-height: 48px;
+
+  border-radius: 12px;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    0.2s ease;
+}
+
+.profile-cancel-premium {
+  border:
+    1px solid #dfd3d7;
+
+  background: white;
+
+  color: #3b3034;
+}
+
+.profile-cancel-premium:hover {
+  background: #f8f3f5;
+}
+
+.profile-save-premium {
+  border: none;
+
+  background:
+    linear-gradient(135deg,
+      #b21e52,
+      #c72d63);
+
+  color: white;
+
+  box-shadow:
+    0 10px 24px rgba(180,
+      35,
+      82,
+      0.22);
+}
+
+.profile-save-premium:hover {
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.profile-alert {
+  margin-top: 22px;
+
+  padding:
+    18px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  border-radius: 14px;
+
+  font-size: 12px;
+}
+
+.profile-alert.success {
+  border:
+    1px solid #cce8d4;
+
+  background: #f0fbf4;
+
+  color: #247042;
+}
+
+.profile-alert.error {
+  border:
+    1px solid #f0cbd4;
+
+  background: #fff2f5;
+
+  color: #a62347;
+}
+
+.profile-alert-icon {
+  width: 34px;
+
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    2px solid #2b8c50;
+
+  border-radius: 50%;
+
+  font-weight: 900;
+}
+
+.profile-alert strong {
+  display: block;
+
+  margin-bottom: 3px;
+}
+
+.profile-alert span {
+  display: block;
+
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.profile-loading-card {
+  width:
+    min(440px,
+      calc(100% - 30px));
+
+  margin:
+    150px auto;
+
+  padding: 34px;
+
+  border:
+    1px solid #efdfe4;
+
+  border-radius: 18px;
+
+  background: white;
+
+  text-align: center;
+
+  box-shadow:
+    0 18px 40px rgba(78,
+      31,
+      47,
+      0.08);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 700px) {
+
+  .premium-profile-page {
+    padding: 22px 15px 50px;
+  }
+
+  .premium-profile-header {
+    flex-direction: column;
+  }
+
+  .profile-home-btn {
+    width: 100%;
+  }
+
+  .premium-profile-header h1 {
+    font-size: 38px;
+  }
+
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .premium-field-full {
+    grid-column: auto;
+  }
+
+  .premium-profile-form {
+    padding: 25px 17px;
+  }
+
+  .profile-form-footer {
+    flex-direction: column-reverse;
+  }
+
+  .profile-cancel-premium,
+  .profile-save-premium {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MILAN LOVE LETTER
+========================================================= */
+
+.milan-letter-section {
+  position: relative;
+
+  width: 100%;
+
+  margin-bottom: 26px;
+
+  padding: 10px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
+
+.letter-glow {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(30px);
+
+  pointer-events: none;
+}
+
+.letter-glow-one {
+  width: 110px;
+  height: 110px;
+
+  top: 20px;
+  left: 5px;
+
+  background:
+    rgba(199, 45, 99, 0.09);
+}
+
+.letter-glow-two {
+  width: 90px;
+  height: 90px;
+
+  right: 4px;
+  bottom: 20px;
+
+  background:
+    rgba(205, 164, 76, 0.10);
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.milan-envelope {
+  position: relative;
+
+  width: min(260px, 100%);
+  height: 290px;
+
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(145deg,
+      #fff8f3,
+      #f9e7ec);
+
+  box-shadow:
+    0 18px 38px rgba(96, 39, 58, 0.12);
+}
+
+
+/* =========================================================
+   ENVELOPE BACK
+========================================================= */
+
+.envelope-back {
+  position: absolute;
+
+  inset: 0;
+
+  border:
+    1px solid rgba(153, 58, 87, 0.10);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(145deg,
+      #f9e9ed,
+      #f4dce3);
+}
+
+
+/* =========================================================
+   LETTER PAPER
+========================================================= */
+
+.letter-paper {
+  position: absolute;
+
+  z-index: 4;
+
+  top: 26px;
+
+  width: calc(100% - 34px);
+  height: 205px;
+
+  padding:
+    18px 18px 14px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(194, 145, 63, 0.18);
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(180deg,
+      #fffefb,
+      #fffaf6);
+
+  box-shadow:
+    0 12px 25px rgba(68, 35, 45, 0.08);
+}
+
+
+/* =========================================================
+   GOLD LINE
+========================================================= */
+
+.letter-gold-line {
+  position: absolute;
+
+  top: 0;
+  left: 16px;
+  right: 16px;
+
+  height: 2px;
+
+  background:
+    linear-gradient(90deg,
+      transparent,
+      #d2a64f,
+      transparent);
+}
+
+
+/* =========================================================
+   SMALL HEADING
+========================================================= */
+
+.letter-small-heading {
+  margin-bottom: 12px;
+
+  color: #c3984a;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 2.2px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   PAGE WINDOW
+========================================================= */
+
+.letter-page-window {
+  position: relative;
+
+  width: 100%;
+  height: 142px;
+
+  overflow: hidden;
+}
+
+.letter-page {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  padding: 6px 6px 8px;
+  box-sizing: border-box;
+
+  overflow: hidden;
+  text-align: center;
+}
+
+.letter-page h3 {
+  margin: 0 0 6px;
+
+  color: #7e2444;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+
+  line-height: 1.12;
+
+  flex-shrink: 0;
+}
+
+.letter-page p {
+  margin: 0 auto;
+
+  max-width: 205px;
+
+  color: #6d5c62;
+
+  font-size: clamp(10px, 1.1vw, 12px);
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+.letter-signature {
+  display: block;
+
+  margin-top: 10px;
+
+  color: #b32857;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.letter-page-dots {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 5px;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  gap: 6px;
+}
+
+.letter-dot {
+  width: 6px;
+  height: 6px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background:
+    rgba(139, 74, 94, 0.24);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.letter-dot.active {
+  background: #b92d5b;
+
+  transform: scale(1.35);
+}
+
+
+/* =========================================================
+   ENVELOPE FRONT
+========================================================= */
+
+.envelope-front-left,
+.envelope-front-right,
+.envelope-front-bottom {
+  position: absolute;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.envelope-front-left {
+  left: 0;
+  bottom: 0;
+
+  width: 54%;
+  height: 105px;
+
+  clip-path:
+    polygon(0 0,
+      100% 100%,
+      0 100%);
+
+  background:
+    linear-gradient(145deg,
+      #f5d8df,
+      #ecc4cf);
+}
+
+.envelope-front-right {
+  right: 0;
+  bottom: 0;
+
+  width: 54%;
+  height: 105px;
+
+  clip-path:
+    polygon(100% 0,
+      100% 100%,
+      0 100%);
+
+  background:
+    linear-gradient(215deg,
+      #f5d8df,
+      #ecc4cf);
+}
+
+.envelope-front-bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 74px;
+
+  clip-path:
+    polygon(0 100%,
+      50% 0,
+      100% 100%);
+
+  background:
+    linear-gradient(180deg,
+      #f8e5ea,
+      #ebc7d0);
+}
+
+
+/* =========================================================
+   WAX SEAL
+========================================================= */
+
+.milan-wax-seal {
+  position: absolute;
+
+  z-index: 8;
+
+  left: 50%;
+  bottom: 32px;
+
+  width: 48px;
+  height: 48px;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    3px double rgba(255, 222, 150, 0.70);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(circle at 35% 30%,
+      #c93e6d,
+      #8f173f 70%);
+
+  color: #f6d784;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 8px 18px rgba(122, 27, 60, 0.25);
+}
+
+
+/* =========================================================
+   BOTTOM TEXT
+========================================================= */
+
+.letter-bottom-text {
+  margin-top: 15px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #9d3156;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+}
+
+.letter-bottom-text span {
+  color: #cca24e;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 980px) {
+
+  .milan-envelope {
+    width: min(340px, 100%);
+  }
+
+}
+
+/* =========================================================
+   PROFILE COMPLETION
+========================================================= */
+
+.profile-completion-card {
+  width: 100%;
+  margin-top: 24px;
+  padding: 18px 16px;
+  box-sizing: border-box;
+
+  border: 1px solid #efd7df;
+  border-radius: 16px;
+
+  background: linear-gradient(145deg,
+      #fffdfc,
+      #fff6f9);
+
+  box-shadow: 0 10px 24px rgba(92, 37, 55, 0.07);
+
+  text-align: left;
+}
+
+.profile-completion-top {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.profile-completion-top span {
+  color: #4b343c;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.profile-completion-top strong {
+  color: #bd2758;
+  font-size: 13px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.profile-completion-track {
+  width: 100%;
+  height: 8px;
+
+  overflow: hidden;
+
+  background: #f0dfe5;
+  border-radius: 50px;
+}
+
+.profile-completion-fill {
+  height: 100%;
+
+  background: linear-gradient(90deg,
+      #b51f52,
+      #d34e79,
+      #d5a84d);
+
+  border-radius: 50px;
+
+  transition: width 0.4s ease;
+}
+
+.profile-completion-card p {
+  margin: 11px 0 0;
+
+  color: #77656b;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  text-align: left;
+}
