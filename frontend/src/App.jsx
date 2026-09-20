@@ -1118,6 +1118,11 @@ function App() {
   const isAdmin =
     currentUser?.role?.toString().trim().toLowerCase() === "admin";
 
+  // Vendor pages use business-focused navigation. Customer/public
+  // marketplace links stay unchanged for everyone else.
+  const isVendor =
+    currentUser?.role?.toString().trim().toLowerCase() === "vendor";
+
 
   /* =======================================================
      CUSTOMER NOTIFICATIONS
@@ -2022,54 +2027,73 @@ function App() {
           {/* NAVIGATION */}
 
           <nav className="nav-links">
-
-            <a
-              className="active"
-              href="#home"
-            >
-              Home
-            </a>
-
-            <a href="#services">
-              Services
-            </a>
-
-            <a href="#vendors">
-              Vendors
-            </a>
-
-            <a href="#how-it-works">
-              How It Works
-            </a>
-
-            {currentUser &&
-              currentUser?.role?.toString().trim().toLowerCase() === "vendor" && (
-                <button
-                  type="button"
-                  onClick={() => navigate("/vendor-verification")}
-                  style={{
-                    border: "0",
-                    background: "transparent",
-                    color:
-                      vendorVerificationStatus === "approved"
-                        ? "#16835d"
-                        : vendorVerificationStatus === "pending"
-                          ? "#b7791f"
-                          : "#dc2626",
-                    font: "inherit",
-                    fontWeight: "700",
-                    cursor: "pointer",
-                    padding: "8px 4px",
-                    whiteSpace: "nowrap",
-                  }}
+            {isVendor ? (
+              <>
+                <Link
+                  className="active"
+                  to="/vendor-dashboard"
                 >
-                  {vendorVerificationStatus === "approved"
-                    ? "🟢 Verified"
-                    : vendorVerificationStatus === "pending"
-                      ? "🟠 Verification Pending"
-                      : "🔴 Not Verified"}
-                </button>
-              )}
+                  Dashboard
+                </Link>
+
+                <a href="#services">
+                  My Business
+                </a>
+
+                <Link to="/vendor-dashboard">
+                  Enquiries
+                </Link>
+              </>
+            ) : (
+              <>
+                <a
+                  className="active"
+                  href="#home"
+                >
+                  Home
+                </a>
+
+                <a href="#services">
+                  Services
+                </a>
+
+                <a href="#vendors">
+                  Vendors
+                </a>
+
+                <a href="#how-it-works">
+                  How It Works
+                </a>
+              </>
+            )}
+
+            {isVendor && (
+              <button
+                type="button"
+                onClick={() => navigate("/vendor-verification")}
+                style={{
+                  border: "0",
+                  background: "transparent",
+                  color:
+                    vendorVerificationStatus === "approved"
+                      ? "#16835d"
+                      : vendorVerificationStatus === "pending"
+                        ? "#b7791f"
+                        : "#dc2626",
+                  font: "inherit",
+                  fontWeight: "700",
+                  cursor: "pointer",
+                  padding: "8px 4px",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {vendorVerificationStatus === "approved"
+                  ? "🟢 Verified"
+                  : vendorVerificationStatus === "pending"
+                    ? "🟠 Verification Pending"
+                    : "🔴 Not Verified"}
+              </button>
+            )}
 
             {currentUser &&
               currentUser?.role?.toString().trim().toLowerCase() === "customer" && (
@@ -3663,121 +3687,123 @@ function App() {
             HOW IT WORKS
         =================================================== */}
 
-        < section
-          className="how-it-works"
-          id="how-it-works"
-        >
+        {!isVendor && (
+          <section
+            className="how-it-works"
+            id="how-it-works"
+          >
 
-          <div className="container">
+            <div className="container">
 
-            <div className="section-heading">
+              <div className="section-heading">
 
-              <p>
-                HOW IT WORKS
-              </p>
+                <p>
+                  HOW IT WORKS
+                </p>
 
-              <h2>
-                Plan Your Wedding With Milan
-              </h2>
+                <h2>
+                  Plan Your Wedding With Milan
+                </h2>
+
+              </div>
+
+
+              <div className="steps">
+
+
+                <div className="step">
+
+                  <span>
+                    01
+                  </span>
+
+                  <div>
+                    🔍
+                  </div>
+
+                  <h3>
+                    Search
+                  </h3>
+
+                  <p>
+                    Find wedding vendors
+                    near you.
+                  </p>
+
+                </div>
+
+
+                <div className="step">
+
+                  <span>
+                    02
+                  </span>
+
+                  <div>
+                    ⚖️
+                  </div>
+
+                  <h3>
+                    Compare
+                  </h3>
+
+                  <p>
+                    Compare prices,
+                    ratings and reviews.
+                  </p>
+
+                </div>
+
+
+                <div className="step">
+
+                  <span>
+                    03
+                  </span>
+
+                  <div>
+                    📅
+                  </div>
+
+                  <h3>
+                    Book
+                  </h3>
+
+                  <p>
+                    Choose your favorite
+                    vendor.
+                  </p>
+
+                </div>
+
+
+                <div className="step">
+
+                  <span>
+                    04
+                  </span>
+
+                  <div>
+                    🎉
+                  </div>
+
+                  <h3>
+                    Celebrate
+                  </h3>
+
+                  <p>
+                    Enjoy your perfect
+                    wedding day.
+                  </p>
+
+                </div>
+
+              </div>
 
             </div>
 
-
-            <div className="steps">
-
-
-              <div className="step">
-
-                <span>
-                  01
-                </span>
-
-                <div>
-                  🔍
-                </div>
-
-                <h3>
-                  Search
-                </h3>
-
-                <p>
-                  Find wedding vendors
-                  near you.
-                </p>
-
-              </div>
-
-
-              <div className="step">
-
-                <span>
-                  02
-                </span>
-
-                <div>
-                  ⚖️
-                </div>
-
-                <h3>
-                  Compare
-                </h3>
-
-                <p>
-                  Compare prices,
-                  ratings and reviews.
-                </p>
-
-              </div>
-
-
-              <div className="step">
-
-                <span>
-                  03
-                </span>
-
-                <div>
-                  📅
-                </div>
-
-                <h3>
-                  Book
-                </h3>
-
-                <p>
-                  Choose your favorite
-                  vendor.
-                </p>
-
-              </div>
-
-
-              <div className="step">
-
-                <span>
-                  04
-                </span>
-
-                <div>
-                  🎉
-                </div>
-
-                <h3>
-                  Celebrate
-                </h3>
-
-                <p>
-                  Enjoy your perfect
-                  wedding day.
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section >
+          </section>
+        )}
 
 
         {/* ===================================================
@@ -3890,26 +3916,48 @@ function App() {
           </div>
 
           <nav className="milan-premium-footer-links" aria-label="Footer navigation">
-            <a href="#home">
-              Home
-            </a>
+            {isVendor ? (
+              <>
+                <Link to="/vendor-dashboard">
+                  Dashboard
+                </Link>
 
-            <a href="#services">
-              Services
-            </a>
+                <a href="#services">
+                  My Business
+                </a>
 
-            <a href="#vendors">
-              Vendors
-            </a>
+                <Link to="/vendor-dashboard">
+                  Enquiries
+                </Link>
 
-            <a href="#how-it-works">
-              How It Works
-            </a>
+                <Link to="/vendor-verification">
+                  Verification
+                </Link>
+              </>
+            ) : (
+              <>
+                <a href="#home">
+                  Home
+                </a>
 
-            {currentUser?.role?.toLowerCase() === "customer" && (
-              <Link to="/saved-vendors">
-                Saved Vendors
-              </Link>
+                <a href="#services">
+                  Services
+                </a>
+
+                <a href="#vendors">
+                  Vendors
+                </a>
+
+                <a href="#how-it-works">
+                  How It Works
+                </a>
+
+                {currentUser?.role?.toLowerCase() === "customer" && (
+                  <Link to="/saved-vendors">
+                    Saved Vendors
+                  </Link>
+                )}
+              </>
             )}
           </nav>
 
