@@ -1,0 +1,254 @@
+.milan-vendor-closing {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(82px, 10vw, 145px) 22px;
+  border-top: 0;
+  background: #681c33;
+  color: #fffdf7;
+  text-align: center;
+}
+
+.milan-vendor-closing::before,
+.milan-vendor-closing::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(32vw, 390px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(185, 138, 66, .18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.milan-vendor-closing::before {
+  left: max(-19vw, -260px);
+  top: 7%;
+}
+
+.milan-vendor-closing::after {
+  right: max(-19vw, -260px);
+  bottom: 3%;
+}
+
+.milan-vendor-closing-inner {
+  width: min(920px, 100%);
+  margin: auto;
+}
+
+.milan-vendor-closing-kicker,
+.milan-vendor-closing-signature {
+  color: #e4c99b;
+  font: 700 11px Arial, Helvetica, sans-serif;
+  letter-spacing: .23em;
+}
+
+.milan-vendor-closing-rule {
+  width: 55px;
+  height: 1px;
+  margin: 25px auto 35px;
+  background: #b98a42;
+}
+
+.milan-vendor-closing h2 {
+  margin: 0;
+  color: #fffdf7;
+  font: 500 clamp(45px, 6.9vw, 91px)/1.06 Georgia, "Times New Roman", serif;
+  letter-spacing: -.06em;
+  text-wrap: balance;
+}
+
+.milan-vendor-closing h2 em {
+  color: #dfbc80;
+  font-weight: 400;
+}
+
+.milan-vendor-closing-intro {
+  margin: 27px auto 0;
+  color: #e4c99b;
+  font: 15px/1.7 Arial, Helvetica, sans-serif;
+}
+
+.milan-vendor-line-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 3vw, 30px);
+  width: min(760px, 100%);
+  min-height: 250px;
+  margin: clamp(40px, 6vw, 75px) auto 32px;
+  padding: 20px clamp(12px, 3vw, 35px);
+  border-top: 1px solid #dec9ab;
+  border-bottom: 1px solid #dec9ab;
+}
+
+.milan-vendor-line-mark {
+  align-self: flex-start;
+  color: #b98a42;
+  font: 60px/.9 Georgia, serif;
+  opacity: .7;
+}
+
+.milan-vendor-line-mark:last-child {
+  align-self: flex-end;
+}
+
+.milan-vendor-lines {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 178px;
+  display: grid;
+  place-items: center;
+}
+
+.milan-vendor-quote {
+  grid-area: 1 / 1;
+  width: 100%;
+  opacity: 0;
+  animation: milan-vendor-quote 80s ease-in-out infinite;
+  animation-delay: calc(var(--line-index) * 8s);
+}
+
+.milan-vendor-quote p {
+  margin: 0;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.milan-vendor-quote p[lang="en"] {
+  color: #fffdf7;
+  font: italic 500 clamp(22px, 3vw, 34px)/1.3 Georgia, "Times New Roman", serif;
+}
+
+.milan-vendor-quote p[lang="hi"] {
+  margin-top: 17px;
+  color: #e4c99b;
+  font: 500 clamp(17px, 2vw, 22px)/1.55 "Nirmala UI", "Mangal", sans-serif;
+}
+
+@keyframes milan-vendor-quote {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  1%,
+  9% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  10%,
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.milan-vendor-closing-signature {
+  display: block;
+}
+
+.milan-vendor-closing-signature span {
+  margin-left: 8px;
+  color: #b98a42;
+}
+
+.milan-vendor-closing-signoff {
+  max-width: 660px;
+  min-height: 125px;
+  margin: 0 auto 25px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(228, 201, 155, .38);
+  color: #f5e9d5;
+  font: italic 500 clamp(20px, 2.4vw, 28px)/1.45 Georgia, serif;
+  text-wrap: balance;
+  animation: milan-signoff-enter .45s ease both;
+}
+
+.milan-vendor-closing-signoff span {
+  color: #dfbc80;
+}
+
+@keyframes milan-signoff-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The existing React footer belongs to the vendor page; match the HTML prototype. */
+body:has(.milan-vendor-closing) .milan-premium-footer {
+  background: #491325 !important;
+  color: #f8f0e6;
+}
+
+body:has(.milan-vendor-closing) .milan-premium-footer-brand {
+  color: #f8f0e6;
+}
+
+body:has(.milan-vendor-closing) .milan-premium-footer-brand-wrap p,
+body:has(.milan-vendor-closing) .milan-premium-footer-links a,
+body:has(.milan-vendor-closing) .milan-premium-footer-bottom {
+  color: #d9c5c8;
+}
+
+body:has(.milan-vendor-closing) .milan-premium-footer-links a:hover {
+  color: #dfbc80;
+}
+
+@media (max-width: 600px) {
+  .milan-vendor-closing {
+    padding: 80px 18px;
+  }
+
+  .milan-vendor-closing::before,
+  .milan-vendor-closing::after {
+    width: 210px;
+  }
+
+  .milan-vendor-closing h2 {
+    font-size: clamp(42px, 10vw, 62px);
+  }
+
+  .milan-vendor-line-frame {
+    gap: 8px;
+    min-height: 290px;
+  }
+
+  .milan-vendor-line-mark {
+    font-size: 35px;
+  }
+
+  .milan-vendor-lines {
+    min-height: 230px;
+  }
+
+  .milan-vendor-quote p[lang="en"] {
+    font-size: clamp(21px, 5.2vw, 29px);
+  }
+
+  .milan-vendor-quote p[lang="hi"] {
+    font-size: clamp(16px, 4.2vw, 20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .milan-vendor-quote {
+    animation: none;
+  }
+
+  .milan-vendor-quote:first-child {
+    opacity: 1;
+  }
+
+  .milan-vendor-closing-signoff {
+    animation: none;
+  }
+}

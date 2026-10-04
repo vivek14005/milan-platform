@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+import re
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
@@ -39,6 +40,12 @@ def register(
     clean_phone = user.phone.strip()
     clean_name = user.full_name.strip()
 
+    if not re.fullmatch(r"[0-9]{10}", clean_phone):
+        raise HTTPException(
+            status_code=400,
+            detail="Phone number must contain exactly 10 digits."
+        )
+
     # =====================================================
     # CHECK DUPLICATE EMAIL
     # =====================================================
@@ -54,10 +61,10 @@ def register(
     )
 
     if existing_email:
-        return {
-            "message":
-                "This email is already registered. Please login instead."
-        }
+        raise HTTPException(
+            status_code=409,
+            detail="This email is already registered. Please login instead."
+        )
 
     # =====================================================
     # CHECK DUPLICATE PHONE
@@ -72,10 +79,10 @@ def register(
     )
 
     if existing_phone:
-        return {
-            "message":
-                "This phone number is already registered."
-        }
+        raise HTTPException(
+            status_code=409,
+            detail="This phone number is already registered."
+        )
 
     # =====================================================
     # CREATE NEW USER
@@ -128,19 +135,19 @@ def login(
     )
 
     if not existing_user:
-        return {
-            "message":
-                "Invalid email or password"
-        }
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid email or password"
+        )
 
     if not verify_password(
         user.password,
         existing_user.password
     ):
-        return {
-            "message":
-                "Invalid email or password"
-        }
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid email or password"
+        )
 
     # =====================================================
     # CREATE JWT TOKEN
@@ -353,6 +360,12 @@ def update_profile(
             raise HTTPException(
                 status_code=400,
                 detail="Phone number cannot be empty."
+            )
+
+        if not re.fullmatch(r"[0-9]{10}", clean_phone):
+            raise HTTPException(
+                status_code=400,
+                detail="Phone number must contain exactly 10 digits."
             )
 
         # Check phone belongs to another user

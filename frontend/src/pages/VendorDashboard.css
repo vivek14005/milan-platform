@@ -1,1005 +1,641 @@
-/* =========================================================
-   VENDOR DASHBOARD
-========================================================= */
-
-.vendor-dashboard-page {
-  min-height: 100vh;
-  padding: 55px 20px 90px;
-
+/* Milan vendor dashboard — scoped so customer pages stay unchanged. */
+.vendor-dashboard-page,
+.vendor-dashboard-message {
+  --vd-wine: #681c33;
+  --vd-wine-dark: #45101f;
+  --vd-ink: #341f26;
+  --vd-gold: #b98a42;
+  --vd-gold-soft: #d8b987;
+  --vd-ivory: #fbf8f0;
+  --vd-paper: #fffdf7;
+  --vd-line: #e5d6bd;
+  --vd-muted: #78616a;
+  min-height: 100svh;
   background:
-    radial-gradient(circle at top right,
-      rgba(248, 194, 214, 0.28),
-      transparent 30%),
-    linear-gradient(180deg,
-      #fffafa 0%,
-      #fff5f8 100%);
+    radial-gradient(circle at 92% 4%, rgba(185, 138, 66, .12), transparent 24rem),
+    linear-gradient(180deg, #fffdf8 0%, var(--vd-ivory) 48%, #f6eee2 100%);
+  color: var(--vd-ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.vendor-dashboard-page * {
+  box-sizing: border-box;
+}
+
+.vendor-dashboard-page button {
+  font-family: inherit;
 }
 
 .vendor-dashboard-shell {
-  width: min(1180px, 100%);
-  margin: auto;
+  width: min(1220px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: clamp(54px, 7vw, 104px) 0 110px;
 }
 
-
-/* =========================================================
-   LOADING / ERROR
-========================================================= */
-
+/* Loading and error */
 .vendor-dashboard-message {
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+  display: grid;
+  place-content: center;
+  justify-items: center;
   padding: 30px;
-
   text-align: center;
+}
 
-  background: #fff8fa;
-
-  color: #3b2c31;
+.vendor-dashboard-message::before {
+  content: "M";
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  border: 1px solid var(--vd-gold-soft);
+  border-radius: 50%;
+  color: var(--vd-wine);
+  font: 500 30px Georgia, serif;
 }
 
 .vendor-dashboard-message h2 {
-  margin-bottom: 10px;
+  margin: 0 0 12px;
+  color: var(--vd-wine);
+  font: 500 clamp(34px, 5vw, 48px)/1.08 Georgia, serif;
 }
 
 .vendor-dashboard-message p {
-  color: #746b70;
+  max-width: 520px;
+  margin: 0;
+  color: var(--vd-muted);
+  line-height: 1.7;
 }
 
 .vendor-dashboard-message button {
-  margin-top: 15px;
-
-  padding: 12px 20px;
-
-  border: none;
-  border-radius: 25px;
-
-  background: #c72d63;
-  color: white;
-
+  min-height: 46px;
+  margin-top: 24px;
+  padding: 12px 23px;
+  border: 1px solid var(--vd-wine);
+  background: var(--vd-wine);
+  color: #fff;
   font-weight: 700;
-
   cursor: pointer;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
+/* Header */
 .vendor-dashboard-header {
-  display: flex;
-
-  align-items: flex-start;
-  justify-content: space-between;
-
-  gap: 30px;
-
-  margin-bottom: 35px;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+  margin-bottom: 46px;
+  padding-bottom: 38px;
+  border-bottom: 1px solid var(--vd-gold-soft);
 }
 
-.vendor-dashboard-eyebrow {
+.vendor-dashboard-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 112px;
+  height: 3px;
+  background: var(--vd-wine);
+}
+
+.vendor-dashboard-eyebrow,
+.vendor-section-heading span {
   display: block;
-
-  margin-bottom: 10px;
-
-  color: #c72d63;
-
-  font-size: 12px;
+  color: var(--vd-gold);
+  font-size: 10px;
   font-weight: 800;
-
-  letter-spacing: 2px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
 }
 
 .vendor-dashboard-header h1 {
-  margin: 0 0 10px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: clamp(38px, 5vw, 58px);
-
-  color: #2b2024;
+  max-width: 760px;
+  margin: 17px 0 15px;
+  color: var(--vd-wine);
+  font: 500 clamp(52px, 7vw, 88px)/.96 Georgia, serif;
+  letter-spacing: -.055em;
 }
 
 .vendor-dashboard-header p {
+  max-width: 570px;
   margin: 0;
-
-  color: #746b70;
-
+  color: var(--vd-muted);
   font-size: 15px;
+  line-height: 1.75;
+}
+
+.vendor-dashboard-header>div:last-child {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end;
+  gap: 10px !important;
+  padding-bottom: 4px;
 }
 
 .vendor-dashboard-home-btn {
-  padding: 12px 20px;
-
-  border: 1px solid #ead6dd;
-  border-radius: 25px;
-
-  background: white;
-
-  color: #a72b56;
-
-  font-size: 13px;
-  font-weight: 700;
-
+  min-height: 46px;
+  padding: 12px 18px;
+  border: 1px solid var(--vd-wine);
+  border-radius: 0;
+  background: transparent;
+  color: var(--vd-wine);
+  font-size: 12px;
+  font-weight: 800;
   cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
 }
 
+.vendor-dashboard-home-btn:first-child {
+  background: var(--vd-wine);
+  color: #fff;
+}
 
-/* =========================================================
-   STATS
-========================================================= */
+.vendor-dashboard-home-btn:hover {
+  transform: translateY(-2px);
+  background: var(--vd-wine-dark);
+  color: #fff;
+}
 
+/* Stats */
 .vendor-dashboard-stats {
   display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 20px;
-
-  margin-bottom: 40px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+  counter-reset: vendor-stat;
 }
 
 .vendor-stat-card {
-  padding: 24px 26px;
+  position: relative;
+  min-width: 0;
+  min-height: 166px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px 28px;
+  overflow: hidden;
+  border: 1px solid var(--vd-line);
+  background: rgba(255, 253, 247, .9);
+  counter-increment: vendor-stat;
+}
 
-  background: white;
+.vendor-stat-card::after {
+  content: "0" counter(vendor-stat);
+  position: absolute;
+  top: 23px;
+  right: 25px;
+  color: rgba(104, 28, 51, .28);
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: .15em;
+}
 
-  border: 1px solid #efdce3;
-  border-radius: 20px;
+.vendor-stat-card:first-child {
+  border-color: var(--vd-wine);
+  background: var(--vd-wine);
+}
 
-  box-shadow:
-    0 15px 35px rgba(104, 43, 65, 0.07);
+.vendor-stat-card:first-child::before {
+  content: "";
+  position: absolute;
+  right: -42px;
+  bottom: -55px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(216, 185, 135, .35);
+  border-radius: 50%;
 }
 
 .vendor-stat-card span {
   display: block;
-
-  margin-bottom: 10px;
-
-  color: #81767b;
-
-  font-size: 13px;
-  font-weight: 600;
+  color: var(--vd-gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
 }
 
 .vendor-stat-card strong {
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 34px;
-
-  color: #c72d63;
+  position: relative;
+  color: var(--vd-wine);
+  font: 500 52px/1 Georgia, serif;
 }
 
+.vendor-stat-card:first-child span,
+.vendor-stat-card:first-child strong {
+  color: #fffaf0;
+}
 
-/* =========================================================
-   ENQUIRIES SECTION
-========================================================= */
+.vendor-stat-card:first-child::after {
+  color: rgba(255, 250, 240, .5);
+}
 
+/* Enquiries */
 .vendor-enquiries-section {
-  padding: 32px;
-
-  background:
-    rgba(255, 255, 255, 0.96);
-
-  border: 1px solid #efdce3;
-  border-radius: 26px;
-
-  box-shadow:
-    0 22px 60px rgba(104, 43, 65, 0.08);
+  padding: clamp(26px, 4vw, 48px);
+  border: 1px solid var(--vd-line);
+  background: rgba(255, 253, 247, .94);
+  box-shadow: 12px 12px 0 rgba(185, 138, 66, .10);
 }
 
 .vendor-section-heading {
   display: flex;
-
   align-items: flex-end;
   justify-content: space-between;
-
-  gap: 20px;
-
-  margin-bottom: 28px;
-}
-
-.vendor-section-heading span {
-  display: block;
-
-  margin-bottom: 7px;
-
-  color: #c72d63;
-
-  font-size: 11px;
-  font-weight: 800;
-
-  letter-spacing: 1.7px;
+  gap: 22px;
+  margin-bottom: 27px;
 }
 
 .vendor-section-heading h2 {
-  margin: 0;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 29px;
-
-  color: #302327;
+  margin: 12px 0 0;
+  color: var(--vd-wine);
+  font: 500 clamp(31px, 4vw, 46px)/1.08 Georgia, serif;
+  letter-spacing: -.025em;
 }
 
 .vendor-section-heading>p {
-  margin: 0;
-
-  color: #8a7f84;
-
-  font-size: 13px;
+  margin: 0 0 5px;
+  color: var(--vd-muted);
+  font-size: 12px;
 }
 
+.vendor-enquiry-filters {
+  display: flex;
+  gap: 0;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 30px;
+  overflow-x: auto;
+  border: 1px solid var(--vd-line);
+  background: var(--vd-ivory);
+}
 
-/* =========================================================
-   ENQUIRY GRID
-========================================================= */
+.vendor-enquiry-filters button {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 9px 14px;
+  border: 0;
+  border-right: 1px solid var(--vd-line);
+  background: transparent;
+  color: var(--vd-wine);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.vendor-enquiry-filters button:last-child {
+  border-right: 0;
+}
+
+.vendor-enquiry-filters button span {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--vd-gold-soft);
+  color: var(--vd-gold);
+  font-size: 10px;
+}
+
+.vendor-enquiry-filters button.active {
+  background: var(--vd-wine);
+  color: #fff;
+}
+
+.vendor-enquiry-filters button.active span {
+  border-color: rgba(255, 255, 255, .45);
+  color: #fff;
+}
 
 .vendor-enquiry-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .vendor-enquiry-card {
-  padding: 24px;
-
-  border: 1px solid #efdee4;
-  border-radius: 20px;
-
-  background:
-    linear-gradient(180deg,
-      #ffffff 0%,
-      #fffafb 100%);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  border: 1px solid var(--vd-line);
+  border-top: 3px solid var(--vd-wine);
+  background: var(--vd-ivory);
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .vendor-enquiry-card:hover {
   transform: translateY(-3px);
-
-  box-shadow:
-    0 15px 35px rgba(109, 46, 69, 0.09);
+  box-shadow: 8px 9px 0 rgba(185, 138, 66, .11);
 }
-
-
-/* =========================================================
-   CUSTOMER
-========================================================= */
 
 .vendor-enquiry-top {
   display: flex;
   align-items: center;
-
-  gap: 12px;
-
-  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-bottom: 23px;
 }
 
 .vendor-customer-avatar {
-  width: 45px;
-  height: 45px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--vd-wine);
   border-radius: 50%;
-
-  background:
-    linear-gradient(145deg,
-      #7a2644,
-      #b83b68);
-
-  color: white;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 18px;
-  font-weight: 700;
+  background: var(--vd-wine);
+  color: #fff;
+  font: 500 22px Georgia, serif;
 }
 
 .vendor-enquiry-customer {
-  flex: 1;
+  flex: 1 1 130px;
+  min-width: 0;
 }
 
 .vendor-enquiry-customer h3 {
-  margin: 0 0 3px;
-
-  color: #34262b;
-
-  font-size: 17px;
+  margin: 0 0 4px;
+  color: var(--vd-ink);
+  font: 500 24px Georgia, serif;
+  overflow-wrap: anywhere;
 }
 
 .vendor-enquiry-customer span {
-  color: #9a8c91;
-
-  font-size: 12px;
+  color: var(--vd-muted);
+  font-size: 11px;
 }
 
 .vendor-status-badge {
-  padding: 6px 10px;
-
-  border-radius: 20px;
-
-  background: #fff0d8;
-
-  color: #9b6809;
-
-  font-size: 11px;
+  padding: 7px 10px;
+  border: 1px solid var(--vd-gold-soft);
+  background: #fff3d9;
+  color: #7a5516;
+  font-size: 10px;
   font-weight: 800;
-
+  letter-spacing: .04em;
   text-transform: capitalize;
 }
 
+.vendor-status-badge.status-accepted {
+  border-color: #9fbea5;
+  background: #edf7ef;
+  color: #2f7040;
+}
 
-/* =========================================================
-   DETAILS
-========================================================= */
+.vendor-status-badge.status-rejected {
+  border-color: #dfb2ae;
+  background: #fff0ed;
+  color: #963645;
+}
 
 .vendor-enquiry-details {
   display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 12px;
-
-  margin-bottom: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .vendor-enquiry-details>div {
+  min-width: 0;
   display: flex;
-  align-items: center;
-
+  align-items: flex-start;
   gap: 10px;
-
-  padding: 13px;
-
-  border-radius: 12px;
-
-  background: #fff4f7;
+  padding: 14px;
+  border: 1px solid var(--vd-line);
+  background: var(--vd-paper);
 }
 
 .vendor-detail-icon {
-  font-size: 17px;
+  flex: none;
+  color: var(--vd-gold);
 }
 
 .vendor-enquiry-details p {
+  min-width: 0;
   margin: 0;
 }
 
-.vendor-enquiry-details small {
-  display: block;
-
-  margin-bottom: 2px;
-
-  color: #9b8d92;
-
-  font-size: 10px;
-}
-
-.vendor-enquiry-details strong {
-  display: block;
-
-  color: #504348;
-
-  font-size: 13px;
-
-  word-break: break-word;
-}
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-.vendor-enquiry-message {
-  padding: 16px;
-
-  background: #fbf8f9;
-
-  border: 1px solid #f0e4e8;
-  border-radius: 13px;
-}
-
+.vendor-enquiry-details small,
 .vendor-enquiry-message small {
   display: block;
-
-  margin-bottom: 7px;
-
-  color: #a09398;
-
-  font-size: 10px;
-  font-weight: 700;
-
+  margin-bottom: 5px;
+  color: var(--vd-gold);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
   text-transform: uppercase;
 }
 
-.vendor-enquiry-message p {
-  margin: 0;
-
-  color: #65595e;
-
+.vendor-enquiry-details strong {
+  color: var(--vd-ink);
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
+.vendor-enquiry-message {
+  flex: 1;
+  margin-top: 11px;
+  padding: 16px;
+  border: 1px solid var(--vd-line);
+  background: var(--vd-paper);
+}
 
-/* =========================================================
-   ACTION BUTTONS
-========================================================= */
+.vendor-enquiry-message p {
+  margin: 8px 0 0;
+  color: var(--vd-muted);
+  font-size: 13px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
 
+.vendor-status-actions,
 .vendor-enquiry-actions {
   display: flex;
-
-  gap: 10px;
-
-  margin-top: 18px;
+  gap: 9px;
+  margin-top: 16px;
 }
 
+.vendor-status-actions button,
 .vendor-contact-btn,
 .vendor-view-btn {
   flex: 1;
-
-  min-height: 42px;
-
-  padding: 10px 15px;
-
-  border-radius: 22px;
-
-  font-size: 12px;
-  font-weight: 700;
-
+  min-height: 44px;
+  padding: 10px 13px;
+  border-radius: 0;
+  font-size: 11px;
+  font-weight: 800;
   cursor: pointer;
+  transition: background .2s ease, color .2s ease;
 }
 
+.vendor-accept-btn,
 .vendor-contact-btn {
-  border: none;
-
-  background:
-    linear-gradient(135deg,
-      #d52c64,
-      #b71d51);
-
-  color: white;
+  border: 1px solid var(--vd-wine);
+  background: var(--vd-wine);
+  color: #fff;
 }
 
+.vendor-reject-btn,
 .vendor-view-btn {
-  border: 1px solid #e2c6d0;
-
-  background: white;
-
-  color: #9f3158;
+  border: 1px solid var(--vd-gold-soft);
+  background: var(--vd-paper);
+  color: var(--vd-wine);
 }
 
+.vendor-accept-btn:hover,
+.vendor-contact-btn:hover {
+  background: var(--vd-wine-dark);
+}
 
-/* =========================================================
-   EMPTY STATE
-========================================================= */
+.vendor-reject-btn:hover,
+.vendor-view-btn:hover {
+  border-color: var(--vd-wine);
+}
+
+.vendor-status-actions button:disabled,
+.vendor-contact-btn:disabled,
+.vendor-view-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
 
 .vendor-empty-state {
-  padding: 60px 20px;
-
+  width: min(650px, 100%);
+  margin: 12px auto;
+  padding: 56px 28px;
+  border: 1px solid var(--vd-gold-soft);
+  background: var(--vd-ivory);
   text-align: center;
 }
 
 .vendor-empty-icon {
-  margin-bottom: 15px;
-
-  color: #cf6288;
-
-  font-size: 36px;
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 23px;
+  border: 1px solid var(--vd-gold-soft);
+  border-radius: 50%;
+  color: var(--vd-gold);
+  font: 42px Georgia, serif;
 }
 
 .vendor-empty-state h3 {
-  margin: 0 0 8px;
-
-  color: #3b2c31;
+  margin: 0 0 12px;
+  color: var(--vd-wine);
+  font: 500 34px Georgia, serif;
 }
 
 .vendor-empty-state p {
   margin: 0;
-
-  color: #8b7f84;
-
-  font-size: 13px;
+  color: var(--vd-muted);
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 760px) {
-
-  .vendor-dashboard-page {
-    padding:
-      30px 14px 60px;
-  }
-
+@media (max-width: 900px) {
   .vendor-dashboard-header {
-    flex-direction: column;
-  }
-
-  .vendor-dashboard-home-btn {
-    width: 100%;
-  }
-
-  .vendor-dashboard-stats {
     grid-template-columns: 1fr;
+    align-items: start;
   }
 
-  .vendor-enquiries-section {
-    padding: 20px;
-  }
-
-  .vendor-section-heading {
-    align-items: flex-start;
-    flex-direction: column;
+  .vendor-dashboard-header>div:last-child {
+    justify-content: flex-start;
+    padding: 0;
   }
 
   .vendor-enquiry-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 680px) {
+  .vendor-dashboard-shell {
+    width: min(100% - 32px, 1220px);
+    padding: 48px 0 74px;
+  }
+
+  .vendor-dashboard-header {
+    gap: 24px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+  }
+
+  .vendor-dashboard-header h1 {
+    font-size: clamp(45px, 13vw, 64px);
+  }
+
+  .vendor-dashboard-header>div:last-child {
+    width: 100%;
+  }
+
+  .vendor-dashboard-home-btn {
+    flex: 1;
+  }
+
+  .vendor-dashboard-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .vendor-stat-card {
+    min-height: 135px;
+    padding: 21px;
+  }
+
+  .vendor-stat-card:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .vendor-stat-card strong {
+    font-size: 43px;
+  }
+
+  .vendor-enquiries-section {
+    padding: 24px 18px;
+    box-shadow: 7px 7px 0 rgba(185, 138, 66, .10);
+  }
+
+  .vendor-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vendor-enquiry-filters {
+    width: 100%;
+  }
+
+  .vendor-enquiry-card {
+    padding: 20px;
+  }
 
   .vendor-enquiry-details {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 430px) {
+
+  .vendor-dashboard-header>div:last-child,
+  .vendor-status-actions,
   .vendor-enquiry-actions {
     flex-direction: column;
+    align-items: stretch !important;
   }
 
-}
-
-/* =========================================================
-   ACCEPT / REJECT BUTTONS
-========================================================= */
-
-.vendor-status-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.vendor-accept-btn,
-.vendor-reject-btn {
-  flex: 1;
-  min-height: 42px;
-
-  border: none;
-  border-radius: 22px;
-
-  font-size: 12px;
-  font-weight: 800;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
-}
-
-
-/* ACCEPT */
-
-.vendor-accept-btn {
-  background: #e9f8ef;
-  color: #18763c;
-}
-
-.vendor-accept-btn:hover {
-  background: #d8f2e2;
-  transform: translateY(-1px);
-}
-
-
-/* REJECT */
-
-.vendor-reject-btn {
-  background: #fff0f1;
-  color: #b42338;
-}
-
-.vendor-reject-btn:hover {
-  background: #ffe2e5;
-  transform: translateY(-1px);
-}
-
-
-/* MOBILE */
-
-@media (max-width: 760px) {
-  .vendor-status-actions {
-    flex-direction: column;
-  }
-}
-
-/* =========================================================
-   ENQUIRY FILTER TABS
-========================================================= */
-
-.vendor-enquiry-filters {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  margin-top: 10px;
-  margin-bottom: 28px;
-
-  padding: 6px;
-
-  width: fit-content;
-  max-width: 100%;
-
-  background: #fff6f8;
-
-  border: 1px solid #f0dce3;
-  border-radius: 30px;
-
-  overflow-x: auto;
-}
-
-.vendor-enquiry-filters button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  min-height: 40px;
-
-  padding: 8px 16px;
-
-  border: none;
-  border-radius: 22px;
-
-  background: transparent;
-
-  color: #76676c;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  white-space: nowrap;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.vendor-enquiry-filters button:hover {
-  background: #ffffff;
-  color: #c72d63;
-
-  transform: translateY(-1px);
-}
-
-.vendor-enquiry-filters button span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 23px;
-  height: 23px;
-
-  padding: 0 6px;
-
-  border-radius: 50px;
-
-  background: #f4e2e8;
-
-  color: #a93a60;
-
-  font-size: 10px;
-  font-weight: 800;
-}
-
-
-/* =========================================================
-   ACTIVE FILTER
-========================================================= */
-
-.vendor-enquiry-filters button.active {
-  background:
-    linear-gradient(135deg,
-      #d52c64,
-      #b71d51);
-
-  color: #ffffff;
-
-  box-shadow:
-    0 7px 18px rgba(183, 29, 81, 0.20);
-}
-
-.vendor-enquiry-filters button.active span {
-  background: #ffffff;
-  color: #c72d63;
-}
-
-
-/* =========================================================
-   STATUS BADGE COLORS
-========================================================= */
-
-.vendor-status-badge.status-pending {
-  background: #fff0d8;
-  color: #9b6809;
-}
-
-.vendor-status-badge.status-accepted {
-  background: #e8f8ee;
-  color: #18763c;
-}
-
-.vendor-status-badge.status-rejected {
-  background: #fff0f1;
-  color: #b42338;
-}
-
-
-/* =========================================================
-   FILTER MOBILE
-========================================================= */
-
-@media (max-width: 760px) {
-
-  .vendor-enquiry-filters {
+  .vendor-dashboard-home-btn,
+  .vendor-status-actions button,
+  .vendor-contact-btn,
+  .vendor-view-btn {
     width: 100%;
-
-    justify-content: flex-start;
-
-    border-radius: 18px;
-
-    padding: 5px;
-  }
-
-  .vendor-enquiry-filters button {
-    flex-shrink: 0;
-
-    padding: 8px 13px;
-  }
-
-}
-
-/* =========================================================
-   MILAN ROLE NOTIFICATION BELL
-   Add this block at the END of VendorDashboard.css AND AdminDashboard.css
-========================================================= */
-.milan-notification-wrap {
-  position: relative;
-  z-index: 80;
-}
-
-.milan-notification-bell {
-  position: relative;
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(107, 25, 54, 0.18);
-  border-radius: 14px;
-  background: #fff;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  font-size: 20px;
-  box-shadow: 0 8px 24px rgba(73, 20, 40, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.milan-notification-bell:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(73, 20, 40, 0.14);
-}
-
-.milan-notification-count {
-  position: absolute;
-  top: -6px;
-  right: -7px;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 5px;
-  border-radius: 999px;
-  background: #b4233f;
-  color: #fff;
-  border: 2px solid #fff;
-  display: grid;
-  place-items: center;
-  font-size: 10px;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.milan-notification-dropdown {
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  width: min(390px, calc(100vw - 32px));
-  max-height: 520px;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid rgba(107, 25, 54, 0.13);
-  border-radius: 20px;
-  box-shadow: 0 24px 65px rgba(48, 15, 28, 0.18);
-  z-index: 9999;
-}
-
-.milan-notification-head {
-  padding: 17px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  border-bottom: 1px solid rgba(107, 25, 54, 0.1);
-}
-
-.milan-notification-head>div {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.milan-notification-head strong {
-  color: #4c1428;
-  font-size: 15px;
-}
-
-.milan-notification-head span {
-  color: #8b6a76;
-  font-size: 11px;
-}
-
-.milan-notification-head button {
-  border: 0;
-  background: transparent;
-  color: #8f2346;
-  font-size: 11px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.milan-notification-list {
-  max-height: 430px;
-  overflow-y: auto;
-}
-
-.milan-notification-item {
-  width: 100%;
-  border: 0;
-  border-bottom: 1px solid rgba(107, 25, 54, 0.07);
-  background: #fff;
-  padding: 14px 16px;
-  display: grid;
-  grid-template-columns: 38px 1fr 8px;
-  gap: 11px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.milan-notification-item:hover,
-.milan-notification-item.unread {
-  background: #fff7f9;
-}
-
-.milan-notification-item-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: #f7e9ee;
-  display: grid;
-  place-items: center;
-  color: #8f2346;
-  font-weight: 900;
-}
-
-.milan-notification-copy {
-  min-width: 0;
-}
-
-.milan-notification-copy strong {
-  display: block;
-  color: #401323;
-  font-size: 13px;
-  margin-bottom: 4px;
-}
-
-.milan-notification-copy p {
-  margin: 0;
-  color: #765763;
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.milan-notification-copy small {
-  display: block;
-  margin-top: 6px;
-  color: #a38a93;
-  font-size: 10px;
-}
-
-.milan-notification-unread-dot {
-  width: 7px;
-  height: 7px;
-  margin-top: 8px;
-  border-radius: 50%;
-  background: #b4233f;
-}
-
-.milan-notification-empty {
-  padding: 34px 22px;
-  text-align: center;
-}
-
-.milan-notification-empty>span {
-  display: block;
-  font-size: 26px;
-  margin-bottom: 8px;
-}
-
-.milan-notification-empty strong {
-  display: block;
-  color: #4c1428;
-  margin-bottom: 5px;
-}
-
-.milan-notification-empty p {
-  margin: 0;
-  color: #8b6a76;
-  font-size: 12px;
-}
-
-.admin-topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-@media (max-width: 700px) {
-  .milan-notification-dropdown {
-    position: fixed;
-    top: 76px;
-    left: 16px;
-    right: 16px;
-    width: auto;
-    max-height: calc(100vh - 96px);
-  }
-
-  .milan-notification-list {
-    max-height: calc(100vh - 180px);
-  }
-
-  .milan-notification-bell {
-    width: 42px;
-    height: 42px;
-  }
-
-  .admin-topbar-actions {
-    gap: 7px;
   }
 }

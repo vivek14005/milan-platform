@@ -1264,3 +1264,12 @@
 
   text-align: left;
 }
+
+/* Browser autofill ki blue strip hataye */
+.premium-input-wrap input:-webkit-autofill,
+.premium-input-wrap input:-webkit-autofill:hover,
+.premium-input-wrap input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #fffdfc inset;
+  -webkit-text-fill-color: #2f2528;
+  caret-color: #2f2528;
+}

@@ -1,0 +1,131 @@
+/* Vendor home only. Add this stylesheet after App.css. */
+body:has(.vendor-journey-section) .navbar {
+  background: #fbf8f0;
+  border-bottom: 1px solid rgba(104, 28, 51, .17);
+  box-shadow: none;
+}
+
+body:has(.vendor-journey-section) .logo {
+  color: #681c33;
+  text-shadow: none;
+}
+
+body:has(.vendor-journey-section) .nav-links a,
+body:has(.vendor-journey-section) .user-profile-button {
+  color: #681c33;
+}
+
+body:has(.vendor-journey-section) .nav-links a.active::after {
+  background: #b98a42;
+}
+
+.hero:has(.hero-left > .hero-badge) {
+  min-height: min(720px, 90svh);
+  background: #fbf8f0;
+  border-bottom: 1px solid #e6d7c0;
+  perspective: none;
+}
+
+.hero:has(.hero-left > .hero-badge)::before,
+.hero:has(.hero-left > .hero-badge)::after {
+  display: none;
+}
+
+.hero:has(.hero-left > .hero-badge) .hero-badge {
+  padding: 9px 15px;
+  border: 1px solid #d8b987;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: none;
+  color: #906e46;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  transform: none;
+}
+
+.hero:has(.hero-left > .hero-badge) .hero-left h1 {
+  max-width: 830px;
+  margin: 27px 0;
+  color: #681c33;
+  font: 500 clamp(52px, 7.2vw, 104px)/.99 Georgia, "Times New Roman", serif;
+  letter-spacing: -.06em;
+  text-shadow: none;
+  overflow-wrap: anywhere;
+}
+
+.hero:has(.hero-left > .hero-badge) .hero-left h1 span {
+  color: #b98a42;
+}
+
+.hero:has(.hero-left > .hero-badge) .hero-description {
+  max-width: 560px;
+  color: #78616a;
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.7;
+}
+
+.hero:has(.hero-left > .hero-badge) .trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero:has(.hero-left > .hero-badge) .trust-row span {
+  padding: 10px 13px;
+  border: 1px solid #d8b987;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: none;
+  color: #681c33;
+  font-size: 12px;
+  transform: none;
+}
+
+body:has(.vendor-journey-section) .vendor-journey-section {
+  background: #fbf8f0 !important;
+}
+
+body:has(.vendor-journey-section) .vendor-journey-section .section-heading h2,
+body:has(.vendor-journey-section) .vendor-showcase-section .section-heading h2 {
+  color: #681c33;
+}
+
+body:has(.vendor-journey-section) .vendor-showcase-section {
+  background: #fffdf7;
+}
+
+@media (max-width: 600px) {
+  .hero:has(.hero-left > .hero-badge) {
+    min-height: auto;
+    padding: 85px 0 95px;
+  }
+
+  .hero:has(.hero-left > .hero-badge) .hero-container {
+    width: calc(100% - 40px);
+  }
+
+  .hero:has(.hero-left > .hero-badge) .hero-left h1 {
+    font-size: clamp(48px, 12vw, 70px);
+  }
+}
+
+/* Final desktop navbar sizing. Keep this at the end of VendorHomeTheme.css. */
+@media (min-width: 901px) {
+
+  body:has(.vendor-journey-section) .navbar,
+  body:has(.milan-vendor-front) .navbar {
+    height: 104px !important;
+    min-height: 104px !important;
+  }
+
+  body:has(.vendor-journey-section) .nav-container,
+  body:has(.milan-vendor-front) .nav-container {
+    width: 100% !important;
+    max-width: none !important;
+    padding-inline: clamp(32px, 4.8vw, 82px) !important;
+    gap: clamp(28px, 3.2vw, 52px) !important;
+  }
+
+  body:has(.vendor-journey-section) .logo,
+  body:has(.milan-vendor-front) .logo {

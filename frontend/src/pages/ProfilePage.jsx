@@ -3,7 +3,33 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ProfilePage.css";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "/api";
+
+const readProfileResponse = async (response, action) => {
+  const body = await response.text();
+  let data = {};
+
+  if (body) {
+    try {
+      data = JSON.parse(body);
+    } catch {
+      // A failed proxy or server can return text or HTML instead of JSON.
+    }
+  }
+
+  if (!response.ok) {
+    const detail = Array.isArray(data.detail)
+      ? data.detail.map((item) => item.msg || String(item)).join(", ")
+      : data.detail || data.message;
+    throw new Error(detail || `${action} (HTTP ${response.status}).`);
+  }
+
+  if (!body || !data || typeof data !== "object" || !Object.keys(data).length) {
+    throw new Error(`${action}: server returned an empty or invalid response (HTTP ${response.status}).`);
+  }
+
+  return data;
+};
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -37,12 +63,14 @@ function ProfilePage() {
     const token = getToken();
 
     if (!token) {
+      setError("Your login session is missing. Please sign in again.");
       setLoading(false);
       return;
     }
 
     try {
       setLoading(true);
+      setError("");
 
       const response = await fetch(
         `${API_URL}/auth/profile`,
@@ -54,13 +82,7 @@ function ProfilePage() {
         }
       );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.detail || "Unable to load profile."
-        );
-      }
+      const data = await readProfileResponse(response, "Unable to load profile");
 
       setUser(data);
 
@@ -163,15 +185,7 @@ function ProfilePage() {
         }
       );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.detail ||
-          data.message ||
-          "Unable to update profile."
-        );
-      }
+      const data = await readProfileResponse(response, "Unable to update profile");
 
       setUser(data.user);
 
@@ -225,10 +239,10 @@ function ProfilePage() {
 
         <div className="login-required-card">
 
-          <h2>Please login first</h2>
+          <h2>{getToken() ? "Unable to load profile" : "Please login first"}</h2>
 
           <p>
-            Login to access your Milan profile.
+            {error || "Login to access your Milan profile."}
           </p>
 
           <button

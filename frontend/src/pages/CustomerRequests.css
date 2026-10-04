@@ -1,0 +1,253 @@
+.milan-requests-page {
+  min-height: 100svh;
+  background: #fbf8f0;
+  color: #361d25;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.milan-requests-page * {
+  box-sizing: border-box;
+}
+
+.milan-requests-page button {
+  cursor: pointer;
+}
+
+.milan-requests-topbar {
+  min-height: 90px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 clamp(20px, 4vw, 70px);
+  border-bottom: 1px solid rgba(104, 28, 51, .17);
+  background: #fbf8f0;
+}
+
+.milan-requests-topbar>span {
+  color: #681c33;
+  font: 600 35px Georgia, "Times New Roman", serif;
+}
+
+.milan-requests-dot {
+  color: #b98a42;
+}
+
+.milan-requests-topbar button {
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid #b98a42;
+  background: transparent;
+  color: #681c33;
+  font: 15px Arial, Helvetica, sans-serif;
+}
+
+.milan-requests-topbar button:hover {
+  color: #a76d27;
+}
+
+.milan-requests-content {
+  width: min(1140px, calc(100% - 44px));
+  margin: 0 auto;
+  padding: clamp(50px, 8vw, 100px) 0 110px;
+  text-align: center;
+}
+
+.milan-requests-kicker {
+  margin: 0;
+  color: #906e46;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+}
+
+.milan-requests-content>h1 {
+  margin: 18px 0 20px;
+  color: #681c33;
+  font: 500 clamp(46px, 6vw, 76px)/1.04 Georgia, "Times New Roman", serif;
+  letter-spacing: -.045em;
+}
+
+.milan-requests-intro {
+  max-width: 610px;
+  margin: 0 auto;
+  color: #78616a;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.milan-requests-content>p[role="status"] {
+  margin: 55px auto 0;
+  color: #78616a;
+}
+
+.milan-requests-empty {
+  width: min(690px, 100%);
+  margin: 54px auto 0;
+  padding: 55px clamp(24px, 5vw, 66px) 62px;
+  border: 1px solid #d8b987;
+  background: #fffdf7;
+  box-shadow: 12px 12px 0 rgba(185, 138, 66, .10);
+  text-align: center;
+}
+
+.milan-requests-empty::before {
+  content: "♡";
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 28px;
+  border: 1px solid #d8b987;
+  border-radius: 50%;
+  color: #b98a42;
+  font: 52px Georgia, serif;
+}
+
+.milan-requests-empty[role="alert"]::before {
+  content: "!";
+  color: #9f3848;
+  font-size: 38px;
+}
+
+.milan-requests-empty h2 {
+  margin: 0 0 16px;
+  color: #681c33;
+  font: 500 clamp(33px, 4vw, 49px)/1.1 Georgia, serif;
+}
+
+.milan-requests-empty p {
+  max-width: 440px;
+  margin: 0 auto;
+  color: #78616a;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.milan-requests-empty button {
+  margin-top: 30px;
+  padding: 15px 24px;
+  border: 1px solid #681c33;
+  border-radius: 0;
+  background: #681c33;
+  color: #fff;
+  font: 600 14px Arial, Helvetica, sans-serif;
+}
+
+.milan-requests-empty button:hover {
+  background: #4e1427;
+}
+
+.milan-requests-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 55px;
+  text-align: left;
+}
+
+.milan-request-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 30px;
+  border: 1px solid #e6d7c0;
+  background: #fffdf7;
+}
+
+.milan-request-card>div {
+  min-width: 0;
+  width: 100%;
+}
+
+.milan-request-category {
+  margin: 0;
+  color: #906e46;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.milan-request-card h2 {
+  margin: 15px 0 16px;
+  color: #681c33;
+  font: 500 29px/1.15 Georgia, serif;
+  overflow-wrap: anywhere;
+}
+
+.milan-request-card p:not(.milan-request-category) {
+  margin: 12px 0;
+  color: #78616a;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.milan-request-message {
+  padding-top: 10px;
+  border-top: 1px solid #e6d7c0;
+}
+
+.milan-request-vendor-link {
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid #b98a42;
+  background: transparent;
+  color: #681c33;
+  font: 600 13px Arial, Helvetica, sans-serif;
+}
+
+.milan-request-status {
+  max-width: 100%;
+  padding: 9px 13px;
+  border: 1px solid #d8b987;
+  color: #815b16;
+  background: #fff5de;
+  font-size: 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.milan-request-status.status-accepted {
+  border-color: #a8c6a9;
+  background: #eff8ee;
+  color: #367444;
+}
+
+.milan-request-status.status-rejected {
+  border-color: #e2bcb9;
+  background: #fff0ec;
+  color: #9f3848;
+}
+
+@media (max-width: 760px) {
+  .milan-requests-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .milan-requests-topbar {
+    min-height: 76px;
+  }
+
+  .milan-requests-topbar>span {
+    font-size: 28px;
+  }
+
+  .milan-requests-topbar button {
+    font-size: 13px;
+  }
+
+  .milan-requests-empty {
+    box-shadow: 7px 7px 0 rgba(185, 138, 66, .10);
+  }
+
+  .milan-request-card {
+    padding: 23px;
+  }
+}

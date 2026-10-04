@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./VendorProfileSetup.css";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "/api";
 
 const serviceCategories = [
   "Marriage Hall",
@@ -184,7 +185,7 @@ function VendorProfileSetup() {
 
     setFormData((previous) => ({
       ...previous,
-      area: "",
+      area: value,
       pincode: "",
     }));
 
@@ -256,14 +257,13 @@ function VendorProfileSetup() {
   // =====================================================
 
   const handleAreaSelect = (location) => {
-    setAreaQuery(location.area);
+    setAreaQuery(location.area || "");
 
     setFormData((previous) => ({
       ...previous,
-      state: location.state,
-      district: location.district,
-      area: location.area,
-      pincode: location.pincode,
+      // A location suggestion must not replace the chosen state/district.
+      area: location.area || "",
+      pincode: String(location.pincode || ""),
     }));
 
     setAreaSuggestions([]);
@@ -323,11 +323,10 @@ function VendorProfileSetup() {
     if (
       !formData.pincode.trim() ||
       !formData.state ||
-      !formData.district ||
-      !formData.area
+      !formData.district
     ) {
       setError(
-        "Please select your state, district and area. Pincode will fill automatically."
+        "Please select your state and district, and enter a 6-digit pincode."
       );
       return;
     }
@@ -463,6 +462,7 @@ function VendorProfileSetup() {
 
   return (
     <div
+      className="milan-vendor-setup"
       style={{
         minHeight: "100vh",
         padding: "50px 20px",
@@ -899,7 +899,7 @@ function VendorProfileSetup() {
                 color: "#544a4f",
               }}
             >
-              Area / Locality *
+              Area / Locality (optional)
             </label>
 
             <input
@@ -923,7 +923,6 @@ function VendorProfileSetup() {
                     : "Type your area / locality"
               }
               autoComplete="off"
-              required
               style={{
                 ...inputStyle,
                 background:
@@ -1022,7 +1021,7 @@ function VendorProfileSetup() {
           </div>
 
 
-          {/* PINCODE AUTO-FILLED */}
+          {/* PINCODE: AUTO-FILLED FROM AREA OR ENTERED MANUALLY */}
 
           <div
             style={{
@@ -1045,13 +1044,18 @@ function VendorProfileSetup() {
               type="text"
               name="pincode"
               value={formData.pincode}
-              readOnly
-              placeholder="Auto-filled after area selection"
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, "").slice(0, 6);
+                setFormData((previous) => ({ ...previous, pincode: value }));
+                setError("");
+              }}
+              inputMode="numeric"
+              maxLength={6}
+              placeholder="Enter 6-digit PIN code"
               required
               style={{
                 ...inputStyle,
-                background: "#f8f5f6",
-                cursor: "not-allowed",
+                background: "#ffffff",
               }}
             />
           </div>

@@ -1,0 +1,347 @@
+.milan-vendor-front,
+.milan-vendor-front * {
+  box-sizing: border-box;
+}
+
+/* Larger vendor navbar on laptop/desktop only. */
+@media (min-width: 901px) {
+  body:has(.milan-vendor-front) .navbar {
+    height: 96px;
+    min-height: 96px;
+  }
+
+  body:has(.milan-vendor-front) .nav-container {
+    width: 100%;
+    max-width: none;
+    padding-inline: clamp(30px, 4.5vw, 78px);
+    gap: clamp(26px, 3vw, 48px);
+  }
+
+  body:has(.milan-vendor-front) .logo {
+    font-size: 40px;
+  }
+
+  body:has(.milan-vendor-front) .nav-links {
+    gap: clamp(25px, 3vw, 46px);
+    font-size: 16px;
+  }
+
+  body:has(.milan-vendor-front) .nav-links a {
+    font-size: 16px;
+    padding-block: 17px;
+  }
+
+  body:has(.milan-vendor-front) .nav-links>button {
+    font-size: 15px !important;
+    padding: 11px 5px !important;
+  }
+
+  body:has(.milan-vendor-front) .user-profile-wrapper {
+    gap: 13px !important;
+  }
+
+  body:has(.milan-vendor-front) .user-profile-wrapper>div>button[aria-label="Notifications"] {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 21px !important;
+  }
+
+  body:has(.milan-vendor-front) .user-profile-button {
+    min-height: 50px;
+    padding: 7px 15px 7px 7px;
+    gap: 10px;
+  }
+
+  body:has(.milan-vendor-front) .user-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+
+  body:has(.milan-vendor-front) .user-profile-name {
+    font-size: 14px;
+  }
+}
+
+.milan-vendor-front {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: calc(100svh - 90px);
+  display: grid;
+  grid-template-columns: minmax(410px, .82fr) minmax(560px, 1.18fr);
+  align-items: stretch;
+  overflow: hidden;
+  padding-left: clamp(28px, 4.6vw, 76px);
+  background: #fbf8f0;
+  border-bottom: 1px solid rgba(104, 28, 51, .17);
+}
+
+.milan-vendor-front::before {
+  content: "MILAN / GROW WITH LOVE";
+  position: absolute;
+  z-index: 4;
+  top: 27px;
+  right: clamp(25px, 4vw, 68px);
+  color: #85634a;
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: .19em;
+}
+
+.milan-vendor-front__copy {
+  position: relative;
+  z-index: 3;
+  min-width: 0;
+  align-self: center;
+  padding: 70px clamp(20px, 3vw, 52px) 64px 0;
+}
+
+.milan-vendor-front__eyebrow {
+  display: inline-block;
+  margin-bottom: 34px;
+  color: #85634a;
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: .19em;
+  text-transform: uppercase;
+}
+
+.milan-vendor-front__eyebrow::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 12px;
+  background: #b98a42;
+}
+
+.milan-vendor-front__copy h1 {
+  max-width: 700px;
+  margin: 0;
+  color: #681c33;
+  font: 400 clamp(66px, 6.45vw, 104px)/.91 Arial, Helvetica, sans-serif;
+  letter-spacing: -.068em;
+}
+
+.milan-vendor-front__copy h1 em {
+  display: inline-block;
+  margin: 10px 0 3px;
+  color: #b98a42;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -.06em;
+}
+
+.milan-vendor-front__copy>p {
+  max-width: 535px;
+  margin: 32px 0 0;
+  color: #78616a;
+  font: 15px/1.75 Arial, sans-serif;
+}
+
+.milan-vendor-front__benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 29px;
+}
+
+.milan-vendor-front__benefits span {
+  padding: 9px 12px;
+  border: 1px solid rgba(104, 28, 51, .18);
+  background: rgba(255, 253, 247, .8);
+  color: #681c33;
+  font: 600 11px/1.3 Arial, sans-serif;
+}
+
+.milan-vendor-front__gallery {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  min-height: calc(100svh - 90px);
+  margin: 0;
+}
+
+.milan-vendor-front__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #e9dfd0;
+}
+
+.milan-vendor-front__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #fbf8f0 0%, rgba(251, 248, 240, .73) 8%, transparent 25%),
+    linear-gradient(0deg, rgba(54, 16, 30, .35) 0%, transparent 34%);
+}
+
+.milan-vendor-front__frame img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.035);
+  transition: opacity .75s ease-in-out, transform 5.5s ease;
+}
+
+.milan-vendor-front__frame img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.milan-vendor-front__gallery figcaption {
+  position: absolute;
+  z-index: 5;
+  right: clamp(22px, 4vw, 66px);
+  bottom: clamp(24px, 5vh, 54px);
+  left: clamp(70px, 10vw, 150px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 26px;
+  color: #fffaf1;
+  border-top: 1px solid rgba(255, 250, 241, .68);
+  border-bottom: 1px solid rgba(255, 250, 241, .35);
+  background: rgba(54, 16, 30, .34);
+  backdrop-filter: blur(10px);
+}
+
+.milan-vendor-front__gallery figcaption>div:first-child {
+  display: grid;
+  gap: 8px;
+}
+
+.milan-vendor-front__gallery small {
+  color: #ecd19d;
+  font: 700 10px Arial, sans-serif;
+  letter-spacing: .17em;
+}
+
+.milan-vendor-front__gallery strong {
+  max-width: 440px;
+  color: #fffaf1;
+  font: 400 clamp(22px, 2.1vw, 32px)/1.08 Georgia, serif;
+}
+
+.milan-vendor-front__dots {
+  display: flex;
+  flex: none;
+  gap: 8px;
+  padding-bottom: 5px;
+}
+
+.milan-vendor-front__dots button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid #f1d59f;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.milan-vendor-front__dots button.is-active {
+  border-color: #fffaf1;
+  background: #fffaf1;
+}
+
+.milan-vendor-front__dots button:focus-visible {
+  outline: 2px solid #fffaf1;
+  outline-offset: 3px;
+}
+
+@media (max-width: 1050px) {
+  .milan-vendor-front {
+    grid-template-columns: minmax(370px, .9fr) minmax(500px, 1.1fr);
+  }
+
+  .milan-vendor-front__copy h1 {
+    font-size: clamp(60px, 6.6vw, 82px);
+  }
+
+  .milan-vendor-front__gallery figcaption {
+    left: 65px;
+  }
+}
+
+@media (max-width: 900px) {
+  .milan-vendor-front {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 0;
+  }
+
+  .milan-vendor-front::before {
+    display: none;
+  }
+
+  .milan-vendor-front__copy {
+    padding: 70px 24px 55px;
+  }
+
+  .milan-vendor-front__copy h1 {
+    max-width: 650px;
+    font-size: clamp(50px, 11vw, 78px);
+  }
+
+  .milan-vendor-front__copy>p {
+    margin-top: 25px;
+  }
+
+  .milan-vendor-front__gallery {
+    min-height: clamp(470px, 105vw, 680px);
+  }
+
+  .milan-vendor-front__frame::after {
+    background: linear-gradient(0deg, rgba(54, 16, 30, .46) 0%, transparent 50%);
+  }
+
+  .milan-vendor-front__gallery figcaption {
+    right: 20px;
+    bottom: 22px;
+    left: 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .milan-vendor-front__eyebrow {
+    margin-bottom: 27px;
+    font-size: 9px;
+  }
+
+  .milan-vendor-front__copy h1 {
+    font-size: clamp(45px, 14vw, 64px);
+  }
+
+  .milan-vendor-front__benefits {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .milan-vendor-front__gallery {
+    min-height: 500px;
+  }
+
+  .milan-vendor-front__gallery figcaption {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 19px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .milan-vendor-front__frame img {
+    transition: none;
+  }
+}

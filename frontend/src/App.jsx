@@ -1,3 +1,7 @@
+import "./App.css";
+import "./pages/VendorHomeTheme.css";
+import MilanVendorFront from "./pages/MilanVendorFront";
+import VendorClosing from "./pages/VendorClosing";
 import VendorProfileSetup from "./pages/VendorProfileSetup";
 import VendorDetails from "./pages/VendorDetailsPage";
 import VendorDashboard from "./pages/VendorDashboard";
@@ -8,13 +12,17 @@ import {
   Route,
   Link,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 
 import "./App.css";
+import "./pages/VendorHomeTheme.css";
+import MilanCustomerHome from "./components/MilanCustomerHome";
 import AuthPage from "./auth/AuthPage";
 import ProfilePage from "./pages/ProfilePage";
 import SavedVendorsPage from "./pages/SavedVendorsPage";
 import CustomerDashboard from "./pages/CustomerDashboard";
+import CustomerRequests from "./pages/CustomerRequests";
 import AdminDashboard from "./pages/AdminDashboard";
 
 
@@ -162,6 +170,7 @@ const getSavedUser = () => {
 function App() {
 
   const navigate = useNavigate();
+  const location = useLocation();
 
 
   /* =======================================================
@@ -173,8 +182,23 @@ function App() {
   const [showAuth, setShowAuth] =
     useState(false);
 
+  const [authInitialRole, setAuthInitialRole] =
+    useState("customer");
+
   const [currentUser, setCurrentUser] =
     useState(() => getSavedUser());
+
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+    const savedUser = getSavedUser();
+    if (savedUser?.full_name) {
+      setCurrentUser((previous) =>
+        previous?.full_name === savedUser.full_name
+          ? previous
+          : { ...(previous || {}), ...savedUser }
+      );
+    }
+  }, [location.pathname]);
 
   const [
     showProfileMenu,
@@ -320,7 +344,7 @@ function App() {
       // ---------------------------------------------------
 
       const meResponse = await fetch(
-        "http://127.0.0.1:8000/auth/me",
+        "/api/auth/me",
         {
           method: "GET",
           headers: {
@@ -340,10 +364,24 @@ function App() {
         );
       }
 
-      const verifiedUser = {
+      let verifiedUser = {
         ...(user || {}),
         ...meData,
       };
+
+      // /auth/me returns email and role; /auth/profile provides the name.
+      if (meData.role?.toString().trim().toLowerCase() === "customer") {
+        try {
+          const profileResponse = await fetch("/api/auth/profile", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (profileResponse.ok) {
+            verifiedUser = { ...verifiedUser, ...(await profileResponse.json()) };
+          }
+        } catch (profileError) {
+          console.error("Unable to load customer name:", profileError);
+        }
+      }
 
       const userRole =
         verifiedUser?.role
@@ -410,7 +448,7 @@ function App() {
       // ---------------------------------------------------
 
       const vendorResponse = await fetch(
-        "http://127.0.0.1:8000/vendors/me",
+        "/api/vendors/me",
         {
           method: "GET",
           headers: {
@@ -530,7 +568,7 @@ function App() {
      SERVICE SELECTION
   ======================================================= */
 
-  const handleServiceClick = (serviceTitle) => {
+  const handleServiceClick = async (serviceTitle) => {
 
     const categoryMap = {
       "Marriage Halls": "Marriage Hall",
@@ -549,32 +587,64 @@ function App() {
       selectedCategory
     );
 
-    setCustomerPincode("");
-    setAreaSearch("");
-    setAreaSuggestions([]);
-    setShowAreaSuggestions(false);
-    setState("");
-    setDistrict("");
-    setArea("");
-    setCustomerAreas([]);
     setLocationError("");
     setVendorList([]);
-    setAvailableDistricts([]);
 
     loadStates();
+    const hasCompleteLocation = state && district;
 
-    setTimeout(() => {
+    if (hasCompleteLocation) {
+      await fetchVendors(selectedCategory);
+      document.getElementById("vendors")?.scrollIntoView({
+        behavior: "smooth",
+      });
+      return;
+    }
 
-      document
-        .getElementById(
-          "service-location-search"
-        )
-        ?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+    document.getElementById("milan-location-panel")?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
 
-    }, 100);
+  const handleCityShortcut = async (city) => {
+    const cityMap = {
+      Mathura: ["Uttar Pradesh", "Mathura"],
+      Agra: ["Uttar Pradesh", "Agra"],
+      Noida: ["Uttar Pradesh", "Gautam Buddha Nagar"],
+      Delhi: ["Delhi", "New Delhi"],
+      Lucknow: ["Uttar Pradesh", "Lucknow"],
+    };
+
+    const [nextState, nextDistrict] = cityMap[city] || [];
+    if (!nextState) return;
+
+    setState(nextState);
+    setDistrict(nextDistrict);
+    setArea("");
+    setAreaSearch("");
+    setCustomerPincode("");
+    setAreaSuggestions([]);
+    setShowAreaSuggestions(false);
+    setLocationError("");
+
+    try {
+      setDistrictsLoading(true);
+      const response = await fetch(
+        `/api/locations/districts?state=${encodeURIComponent(nextState)}`
+      );
+      const data = await response.json();
+      if (response.ok) setAvailableDistricts(data.districts || []);
+    } catch (error) {
+      console.error("Unable to prepare city shortcut:", error);
+    } finally {
+      setDistrictsLoading(false);
+    }
+
+    document.getElementById("milan-location-panel")?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
   };
 
 
@@ -593,7 +663,7 @@ function App() {
       setStatesLoading(true);
 
       const response = await fetch(
-        "http://127.0.0.1:8000/locations/states"
+        "/api/locations/states"
       );
 
       const data = await response.json();
@@ -658,7 +728,7 @@ function App() {
         setDistrictsLoading(true);
 
         const response = await fetch(
-          `http://127.0.0.1:8000/locations/districts?state=${encodeURIComponent(
+          `/api/locations/districts?state=${encodeURIComponent(
             selectedState
           )}`
         );
@@ -759,7 +829,7 @@ function App() {
       setAreaSearchLoading(true);
 
       const response = await fetch(
-        `http://127.0.0.1:8000/locations/search?q=${encodeURIComponent(
+        `/api/locations/search?q=${encodeURIComponent(
           value.trim()
         )}&state=${encodeURIComponent(
           state
@@ -876,7 +946,7 @@ function App() {
         setLocationLoading(true);
 
         const response = await fetch(
-          `http://127.0.0.1:8000/locations/pincode/${value}`
+          `/api/locations/pincode/${value}`
         );
 
         const data =
@@ -934,7 +1004,7 @@ function App() {
      FETCH MATCHING VENDORS
   ======================================================= */
 
-  const fetchVendors = async () => {
+  const fetchVendors = async (serviceOverride = selectedService) => {
 
     try {
 
@@ -957,22 +1027,15 @@ function App() {
         );
       }
 
-      if (area.trim()) {
-        params.append(
-          "area",
-          area.trim()
-        );
-      }
-
-      if (selectedService) {
+      if (serviceOverride) {
         params.append(
           "category",
-          selectedService
+          serviceOverride
         );
       }
 
       const response = await fetch(
-        `http://127.0.0.1:8000/vendors?${params.toString()}`
+        `/api/vendors?${params.toString()}`
       );
 
       const data =
@@ -1020,11 +1083,11 @@ function App() {
   ======================================================= */
 
   const handleServiceSearch =
-    async () => {
+    async (serviceOverride = selectedService) => {
 
       setLocationError("");
 
-      if (!selectedService) {
+      if (!serviceOverride) {
 
         setLocationError(
           "Please select a wedding service first."
@@ -1051,30 +1114,8 @@ function App() {
         return;
       }
 
-      if (!area) {
 
-        setLocationError(
-          "Please select your Area / Locality."
-        );
-
-        return;
-      }
-
-      if (
-        !customerPincode ||
-        !/^[1-9][0-9]{5}$/.test(
-          customerPincode
-        )
-      ) {
-
-        setLocationError(
-          "Please select an area from the suggestions."
-        );
-
-        return;
-      }
-
-      await fetchVendors();
+      await fetchVendors(serviceOverride);
 
       document
         .getElementById("vendors")
@@ -1108,10 +1149,9 @@ function App() {
     "Milan User";
 
 
-  const firstName =
-    displayName
-      .trim()
-      .split(" ")[0];
+  const firstName = currentUser?.role?.toLowerCase() === "customer"
+    ? currentUser.full_name?.trim().split(/\s+/)[0] || "Customer"
+    : displayName.trim().split(" ")[0];
 
   // Keep the admin experience completely separate from
   // customer/vendor marketplace pages.
@@ -1148,7 +1188,7 @@ function App() {
       setNotificationsLoading(true);
 
       const response = await fetch(
-        "http://127.0.0.1:8000/notifications",
+        "/api/notifications",
         {
           method: "GET",
           headers: {
@@ -1201,7 +1241,7 @@ function App() {
     try {
       if (!notification.is_read) {
         const response = await fetch(
-          `http://127.0.0.1:8000/notifications/${notification.id}/read`,
+          `/api/notifications/${notification.id}/read`,
           {
             method: "PUT",
             headers: {
@@ -1259,7 +1299,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/notifications/read-all",
+        "/api/notifications/read-all",
         {
           method: "PUT",
           headers: {
@@ -1322,7 +1362,7 @@ function App() {
       setVendorPortfolioError("");
 
       const response = await fetch(
-        "http://127.0.0.1:8000/vendors/portfolio/me",
+        "/api/vendors/portfolio/me",
         {
           method: "GET",
           headers: {
@@ -1406,7 +1446,7 @@ function App() {
       setVendorPortfolioError("");
 
       const response = await fetch(
-        "http://127.0.0.1:8000/vendors/portfolio/upload",
+        "/api/vendors/portfolio/upload",
         {
           method: "POST",
           headers: {
@@ -1470,7 +1510,7 @@ function App() {
       setVendorPortfolioError("");
 
       const response = await fetch(
-        `http://127.0.0.1:8000/vendors/portfolio/${mediaId}`,
+        `/api/vendors/portfolio/${mediaId}`,
         {
           method: "DELETE",
           headers: {
@@ -1549,7 +1589,7 @@ function App() {
       }
 
       try {
-        const response = await fetch("http://127.0.0.1:8000/saved-vendors", {
+        const response = await fetch("/api/saved-vendors", {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -1599,7 +1639,7 @@ function App() {
       );
 
       const response = await fetch(
-        `http://127.0.0.1:8000/saved-vendors/${numericVendorId}`,
+        `/api/saved-vendors/${numericVendorId}`,
         {
           method: isSaved ? "DELETE" : "POST",
           headers: {
@@ -1665,15 +1705,15 @@ function App() {
         };
 
         const [vendorResponse, enquiryResponse, savesResponse] = await Promise.all([
-          fetch("http://127.0.0.1:8000/vendors/me", {
+          fetch("/api/vendors/me", {
             method: "GET",
             headers,
           }),
-          fetch("http://127.0.0.1:8000/enquiries/vendor", {
+          fetch("/api/enquiries/vendor", {
             method: "GET",
             headers,
           }),
-          fetch("http://127.0.0.1:8000/saved-vendors/vendor/me/count", {
+          fetch("/api/saved-vendors/vendor/me/count", {
             method: "GET",
             headers,
           }),
@@ -1763,7 +1803,7 @@ function App() {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/vendor-verification/me",
+          "/api/vendor-verification/me",
           {
             method: "GET",
             headers: {
@@ -1805,6 +1845,7 @@ function App() {
   if (showAuth) {
     return (
       <AuthPage
+        initialRole={authInitialRole}
         onClose={() =>
           setShowAuth(false)
         }
@@ -2020,7 +2061,7 @@ function App() {
             className="logo"
             href="#home"
           >
-            Milan
+            Milan{isVendor && <span className="milan-vendor-logo-dot">•</span>}
           </a>
 
 
@@ -2443,7 +2484,7 @@ function App() {
 
                         try {
                           const response = await fetch(
-                            "http://127.0.0.1:8000/vendors/me",
+                            "/api/vendors/me",
                             {
                               method: "GET",
                               headers: {
@@ -2523,102 +2564,7 @@ function App() {
             HERO
         =================================================== */}
 
-        <section
-          className="hero"
-          id="home"
-        >
-
-          <div className="hero-container">
-
-            <div className="hero-left">
-
-              {currentUser?.role?.toLowerCase() === "vendor" ? (
-                <>
-                  <div className="hero-badge">
-                    ✨ Your Growth Partner in Every Celebration
-                  </div>
-
-                  <h1>
-                    Grow Your Wedding
-                    <br />
-
-                    <span>
-                      Business
-                    </span>
-
-                    {" "}With Milan
-                  </h1>
-
-                  <p className="hero-description">
-                    Thank you for choosing Milan as a partner in your
-                    growth. Connect with more couples, receive genuine
-                    wedding enquiries, and turn new opportunities into
-                    lasting success.
-                  </p>
-
-                  <div className="trust-row">
-                    <span>
-                      ✓ Reach More Couples
-                    </span>
-
-                    <span>
-                      ✓ Receive Genuine Leads
-                    </span>
-
-                    <span>
-                      ✓ Grow Your Business
-                    </span>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="hero-badge">
-                    ✨ Your Dream Wedding Starts Here
-                  </div>
-
-                  <h1>
-                    Everything You Need
-
-                    <br />
-
-                    For Your{" "}
-
-                    <span>
-                      Perfect
-                    </span>
-
-                    <br />
-
-                    <span>
-                      Wedding
-                    </span>
-                  </h1>
-
-                  <p className="hero-description">
-                    Discover beautiful venues, talented photographers,
-                    decorators, caterers and more — all in one place.
-                  </p>
-
-                  <div className="trust-row">
-                    <span>
-                      ✓ Verified Vendors
-                    </span>
-
-                    <span>
-                      ✓ Best Prices
-                    </span>
-
-                    <span>
-                      ✓ Trusted by 10K+ Couples
-                    </span>
-                  </div>
-                </>
-              )}
-
-            </div>
-          </div>
-
-        </section>
+        <MilanVendorFront />
 
 
         {/* ===================================================
@@ -2643,18 +2589,18 @@ function App() {
                 </span>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "18px", marginBottom: "28px" }}>
+              <div className="vendor-journey-stats" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "18px", marginBottom: "28px" }}>
                 {[
                   { icon: "👀", label: "Profile Views", value: vendorJourneyStats.profileViews, help: "Couples who opened your profile" },
                   { icon: "❤️", label: "Profile Saves", value: vendorJourneyStats.profileSaves, help: "Couples who saved your profile" },
                   { icon: "💌", label: "Total Enquiries", value: vendorJourneyStats.totalEnquiries, help: "Wedding enquiries received" },
                   { icon: "⏳", label: "Pending Enquiries", value: vendorJourneyStats.pendingEnquiries, help: "Enquiries waiting for your response" },
                 ].map((item) => (
-                  <article key={item.label} style={{ padding: "24px", border: "1px solid #efdce3", borderRadius: "22px", background: "#ffffff", boxShadow: "0 14px 34px rgba(104,43,65,0.07)" }}>
-                    <div style={{ width: "48px", height: "48px", display: "grid", placeItems: "center", marginBottom: "16px", borderRadius: "15px", background: "#fff0f5", fontSize: "23px" }}>
+                  <article className="vendor-journey-stat" key={item.label} style={{ padding: "24px", border: "1px solid #efdce3", borderRadius: "22px", background: "#ffffff", boxShadow: "0 14px 34px rgba(104,43,65,0.07)" }}>
+                    <div className="vendor-journey-icon" style={{ width: "48px", height: "48px", display: "grid", placeItems: "center", marginBottom: "16px", borderRadius: "15px", background: "#fff0f5", fontSize: "23px" }}>
                       {item.icon}
                     </div>
-                    <div style={{ marginBottom: "7px", color: "#2f2328", fontFamily: 'Georgia, "Times New Roman", serif', fontSize: "34px", fontWeight: "700" }}>
+                    <div className="stat-value" style={{ marginBottom: "7px", color: "#2f2328", fontFamily: 'Georgia, "Times New Roman", serif', fontSize: "34px", fontWeight: "700" }}>
                       {vendorJourneyLoading ? "—" : item.value}
                     </div>
                     <h3 style={{ margin: "0 0 7px", color: "#34282d", fontSize: "16px" }}>{item.label}</h3>
@@ -2663,21 +2609,21 @@ function App() {
                 ))}
               </div>
 
-              <div style={{ padding: "26px", border: "1px solid #efdce3", borderRadius: "24px", background: "linear-gradient(135deg, #fff8fb 0%, #ffffff 100%)", boxShadow: "0 14px 34px rgba(104,43,65,0.06)" }}>
+              <div className="vendor-journey-progress" style={{ padding: "26px", border: "1px solid #efdce3", borderRadius: "24px", background: "linear-gradient(135deg, #fff8fb 0%, #ffffff 100%)", boxShadow: "0 14px 34px rgba(104,43,65,0.06)" }}>
                 <div style={{ marginBottom: "20px" }}>
-                  <span style={{ display: "inline-block", marginBottom: "7px", color: "#c72d63", fontSize: "11px", fontWeight: "800", letterSpacing: "1.3px" }}>JOURNEY PROGRESS</span>
+                  <span className="vendor-journey-kicker" style={{ display: "inline-block", marginBottom: "7px", color: "#c72d63", fontSize: "11px", fontWeight: "800", letterSpacing: "1.3px" }}>JOURNEY PROGRESS</span>
                   <h3 style={{ margin: 0, color: "#302327", fontFamily: 'Georgia, "Times New Roman", serif', fontSize: "24px" }}>Keep Growing With Milan</h3>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: "12px" }}>
+                <div className="vendor-milestone-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: "12px" }}>
                   {[
                     { label: "Profile Created", complete: vendorJourneyStats.profileCreated },
                     { label: "Business Details Added", complete: vendorJourneyStats.profileCreated },
                     { label: "Portfolio Added", complete: vendorShowcasePhotos.length > 0 || vendorShowcaseVideos.length > 0 },
                     { label: "First Customer Enquiry", complete: vendorJourneyStats.totalEnquiries > 0 },
                   ].map((milestone) => (
-                    <div key={milestone.label} style={{ display: "flex", alignItems: "center", gap: "11px", minHeight: "54px", padding: "13px 15px", borderRadius: "15px", border: milestone.complete ? "1px solid #efccd9" : "1px solid #eee4e8", background: milestone.complete ? "#fff0f5" : "#faf7f8" }}>
-                      <span style={{ width: "28px", height: "28px", flex: "0 0 28px", display: "grid", placeItems: "center", borderRadius: "50%", background: milestone.complete ? "#c72d63" : "#ffffff", border: milestone.complete ? "1px solid #c72d63" : "1px solid #d9cfd3", color: milestone.complete ? "#ffffff" : "#9a8e93", fontSize: "13px", fontWeight: "800" }}>
+                    <div className="vendor-journey-milestone" data-complete={milestone.complete} key={milestone.label} style={{ display: "flex", alignItems: "center", gap: "11px", minHeight: "54px", padding: "13px 15px", borderRadius: "15px", border: milestone.complete ? "1px solid #efccd9" : "1px solid #eee4e8", background: milestone.complete ? "#fff0f5" : "#faf7f8" }}>
+                      <span className="vendor-journey-check" style={{ width: "28px", height: "28px", flex: "0 0 28px", display: "grid", placeItems: "center", borderRadius: "50%", background: milestone.complete ? "#c72d63" : "#ffffff", border: milestone.complete ? "1px solid #c72d63" : "1px solid #d9cfd3", color: milestone.complete ? "#ffffff" : "#9a8e93", fontSize: "13px", fontWeight: "800" }}>
                         {milestone.complete ? "✓" : "○"}
                       </span>
                       <strong style={{ color: milestone.complete ? "#4b303a" : "#776c71", fontSize: "13px" }}>{milestone.label}</strong>
@@ -2848,7 +2794,7 @@ function App() {
                         key={photo.id || `${photo.file_url}-${index}`}
                       >
                         <img
-                          src={`http://127.0.0.1:8000${photo.file_url}`}
+                          src={`/api${photo.file_url}`}
                           alt="Vendor portfolio"
                         />
 
@@ -2884,7 +2830,7 @@ function App() {
                         key={video.id || `${video.file_url}-${index}`}
                       >
                         <video
-                          src={`http://127.0.0.1:8000${video.file_url}`}
+                          src={`/api${video.file_url}`}
                           controls
                         />
 
@@ -3683,6 +3629,41 @@ function App() {
         )}
 
 
+        {isVendor && (
+          <>
+            <section className="preview-dashboard" id="preview-dashboard">
+              <div className="container">
+                <span className="vendor-journey-kicker">MILAN VENDOR</span>
+                <h2>Vendor Dashboard</h2>
+                <p>Manage customer enquiries and wedding leads. Accept or reject a pending enquiry, or contact the customer from the live dashboard.</p>
+                <div className="dashboard-stats">
+                  <div><span>TOTAL ENQUIRIES</span><strong>{vendorJourneyLoading ? "—" : vendorJourneyStats.totalEnquiries}</strong></div>
+                  <div><span>PENDING</span><strong>{vendorJourneyLoading ? "—" : vendorJourneyStats.pendingEnquiries}</strong></div>
+                  <div><span>PROFILE SAVES</span><strong>{vendorJourneyLoading ? "—" : vendorJourneyStats.profileSaves}</strong></div>
+                </div>
+                <div className="enquiry-empty">
+                  <h3>Customer Enquiries</h3>
+                  <div className="enquiry-tabs" aria-label="Enquiry statuses">
+                    <span>All</span><span>Pending</span><span>Accepted</span><span>Rejected</span>
+                  </div>
+                  <p>See each customer's wedding date, message and enquiry status on your dashboard.</p>
+                  <button type="button" className="vendor-preview-link" onClick={() => navigate("/vendor-dashboard")}>Open Dashboard →</button>
+                </div>
+              </div>
+            </section>
+            <section className="verification-note" id="verification">
+              <div className="container">
+                <div>
+                  <h2>Business Verification</h2>
+                  <p>View your verification status and complete your application.</p>
+                </div>
+                <button type="button" className="vendor-preview-link" onClick={() => navigate("/vendor-verification")}>View Verification →</button>
+              </div>
+            </section>
+          </>
+        )}
+
+
         {/* ===================================================
             HOW IT WORKS
         =================================================== */}
@@ -3810,89 +3791,7 @@ function App() {
             PREMIUM 3D WEBSITE ENDING
         =================================================== */}
 
-        <section className="milan-3d-ending">
-
-          <div className="milan-3d-orb milan-3d-orb-one" />
-          <div className="milan-3d-orb milan-3d-orb-two" />
-          <div className="milan-3d-orb milan-3d-orb-three" />
-
-          <div className="milan-3d-ending-inner">
-
-            <div className="milan-3d-kicker">
-              THE MILAN EXPERIENCE
-            </div>
-
-            <h2 className="milan-3d-title">
-              One Celebration.
-              <br />
-              Countless Beautiful Moments.
-            </h2>
-
-            <p className="milan-3d-subtitle">
-              Milan brings the people behind your perfect wedding closer —
-              discover, save and connect with wedding professionals in one
-              beautiful place.
-            </p>
-
-            <div className="milan-3d-scene">
-
-              <article className="milan-3d-card milan-3d-card-left">
-                <div className="milan-3d-card-icon">
-                  📍
-                </div>
-
-                <h3>
-                  Discover Near You
-                </h3>
-
-                <p>
-                  Find wedding venues and professionals around your city and locality.
-                </p>
-              </article>
-
-              <article className="milan-3d-card milan-3d-card-center">
-                <div className="milan-3d-card-icon">
-                  ♡
-                </div>
-
-                <h3>
-                  Save What You Love
-                </h3>
-
-                <p>
-                  Keep your favourite wedding vendors together while planning your special day.
-                </p>
-              </article>
-
-              <article className="milan-3d-card milan-3d-card-right">
-                <div className="milan-3d-card-icon">
-                  💌
-                </div>
-
-                <h3>
-                  Connect With Ease
-                </h3>
-
-                <p>
-                  Send enquiries directly and follow your wedding conversations effortlessly.
-                </p>
-              </article>
-
-            </div>
-
-            <p className="milan-3d-promise">
-              “From the first search to the final celebration,
-              <br />
-              Milan stays a part of your wedding journey.”
-            </p>
-
-            <div className="milan-3d-signature">
-              MILAN ♡
-            </div>
-
-          </div>
-
-        </section>
+        <VendorClosing />
 
       </main>
 
@@ -3979,6 +3878,59 @@ function App() {
   );
 
 
+  const marketplaceHome = isVendor ? homePage : (
+    <MilanCustomerHome
+
+      currentUser={currentUser}
+      firstName={firstName}
+      onLogin={() => {
+        setAuthInitialRole("customer");
+        setShowAuth(true);
+      }}
+      onVendorLogin={() => {
+        setAuthInitialRole("vendor");
+        setShowAuth(true);
+      }}
+      onLogout={handleLogout}
+      onProfile={() => navigate("/profile")}
+      onSavedVendors={() => navigate("/saved-vendors")}
+      onRequestVendors={() => navigate("/customer-requests")}
+      services={services}
+      selectedService={selectedService}
+      onServiceSelect={handleServiceClick}
+      state={state}
+      district={district}
+      areaSearch={areaSearch}
+      customerPincode={customerPincode}
+      availableStates={availableStates}
+      availableDistricts={availableDistricts}
+      statesLoading={statesLoading}
+      districtsLoading={districtsLoading}
+      areaSearchLoading={areaSearchLoading}
+      areaSuggestions={areaSuggestions}
+      showAreaSuggestions={showAreaSuggestions}
+      locationLoading={locationLoading}
+      locationError={locationError}
+      onLoadStates={loadStates}
+      onStateChange={handleCustomerStateChange}
+      onDistrictChange={handleCustomerDistrictChange}
+      onAreaSearchChange={handleAreaSearchChange}
+      onAreaFocus={() => {
+        if (areaSuggestions.length > 0) setShowAreaSuggestions(true);
+      }}
+      onAreaSelect={handleAreaSuggestionSelect}
+      onSearch={handleServiceSearch}
+      onCitySelect={handleCityShortcut}
+      vendorsLoading={vendorsLoading}
+      vendorList={vendorList}
+      savedVendorIds={savedVendorIds}
+      savingVendorIds={savingVendorIds}
+      onToggleSaved={toggleSavedVendor}
+      onVendorDetails={(vendorId) => navigate(`/vendors/${vendorId}`)}
+    />
+  );
+
+
   /* =======================================================
      ROUTES
   ======================================================= */
@@ -3991,12 +3943,12 @@ function App() {
           Even "/" opens the Admin Dashboard. */}
       <Route
         path="/"
-        element={isAdmin ? <AdminDashboard /> : homePage}
+        element={isAdmin ? <AdminDashboard /> : marketplaceHome}
       />
 
       <Route
         path="/admin-dashboard"
-        element={isAdmin ? <AdminDashboard /> : homePage}
+        element={isAdmin ? <AdminDashboard /> : marketplaceHome}
       />
 
       {/* CUSTOMER / GENERAL PAGES:
@@ -4014,6 +3966,10 @@ function App() {
       <Route
         path="/customer-dashboard"
         element={isAdmin ? <AdminDashboard /> : <CustomerDashboard />}
+      />
+      <Route
+        path="/customer-requests"
+        element={isAdmin ? <AdminDashboard /> : <CustomerRequests />}
       />
 
       <Route
@@ -4040,7 +3996,7 @@ function App() {
 
       <Route
         path="*"
-        element={isAdmin ? <AdminDashboard /> : homePage}
+        element={isAdmin ? <AdminDashboard /> : marketplaceHome}
       />
 
     </Routes>

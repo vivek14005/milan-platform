@@ -1,0 +1,2198 @@
+:root {
+  --mi-ivory: #fbf8f0;
+  --mi-paper: #fffaf1;
+  --mi-wine: #681c33;
+  --mi-dark: #36101e;
+  --mi-gold: #b98a42;
+  --mi-ink: #361d25;
+  --mi-muted: #78616a;
+  --mi-line: rgba(104, 28, 51, .17);
+  --mi-pad: clamp(22px, 4vw, 70px)
+}
+
+.milan-site {
+  min-height: 100vh;
+  background: var(--mi-ivory);
+  color: var(--mi-ink);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden
+}
+
+.milan-site * {
+  box-sizing: border-box
+}
+
+.milan-site button,
+.milan-site select,
+.milan-site input {
+  font: inherit
+}
+
+.milan-site button {
+  cursor: pointer
+}
+
+.milan-site a {
+  text-decoration: none;
+  color: inherit
+}
+
+.milan-logo {
+  font: 600 35px Georgia, "Times New Roman", serif;
+  color: var(--mi-wine)
+}
+
+.milan-logo span {
+  color: var(--mi-gold)
+}
+
+.milan-nav {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  height: 90px;
+  padding: 0 var(--mi-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  background: rgba(251, 248, 240, .96);
+  border-bottom: 1px solid var(--mi-line);
+  backdrop-filter: blur(18px)
+}
+
+.milan-nav>nav {
+  display: flex;
+  gap: 38px;
+  font-size: 15px;
+  color: var(--mi-wine)
+}
+
+.milan-nav>nav a {
+  border-bottom: 1px solid transparent;
+  padding: 12px 0
+}
+
+.milan-nav>nav a:hover {
+  border-color: var(--mi-gold)
+}
+
+.milan-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px
+}
+
+.milan-account,
+.milan-vendor-login {
+  min-height: 44px;
+  padding: 11px 18px;
+  border: 1px solid var(--mi-wine);
+  background: transparent;
+  color: var(--mi-wine);
+  font-weight: 600;
+  transition: background .2s ease, color .2s ease
+}
+
+.milan-vendor-login {
+  min-width: 142px;
+  border-radius: 999px
+}
+
+.milan-account:hover,
+.milan-vendor-login:hover {
+  background: var(--mi-wine);
+  color: #fff
+}
+
+.milan-text-action {
+  border: 0;
+  background: transparent;
+  color: var(--mi-wine);
+  font-size: 13px
+}
+
+.milan-hero {
+  position: relative;
+  min-height: calc(100svh - 90px);
+  padding: 32px var(--mi-pad) 0;
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(540px, 1.25fr);
+  gap: 12px;
+  align-items: center
+}
+
+.milan-hero-edition {
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  right: var(--mi-pad);
+  margin: 0;
+  color: #85634a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .19em
+}
+
+.milan-hero-copy {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  align-self: center
+}
+
+.milan-kicker {
+  margin: 0 0 34px;
+  color: #85634a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .19em;
+  text-transform: uppercase
+}
+
+.milan-hero h1 {
+  margin: 0;
+  color: var(--mi-wine);
+  font: 400 clamp(72px, 7.3vw, 112px)/.92 Arial, Helvetica, sans-serif;
+  letter-spacing: -.065em
+}
+
+.milan-hero h1 em {
+  display: inline-block;
+  margin-top: 16px;
+  font: italic 500 1em/.9 Georgia, "Times New Roman", serif;
+  letter-spacing: -.065em
+}
+
+.milan-hero-description {
+  display: none
+}
+
+.milan-mandap {
+  min-width: 0;
+  width: min(59vw, 780px);
+  margin: 0 -2vw 0 0;
+  justify-self: end;
+  align-self: end;
+  text-align: center
+}
+
+.milan-mandap img {
+  display: block;
+  width: 100%;
+  max-height: calc(100svh - 115px);
+  object-fit: contain;
+  object-position: center bottom;
+  mix-blend-mode: multiply;
+  mask-image: radial-gradient(ellipse at center, #000 61%, transparent 82%);
+  transition: transform .45s ease
+}
+
+.milan-mandap:hover img {
+  transform: translateY(-6px) scale(1.012)
+}
+
+.milan-mandap figcaption {
+  position: relative;
+  margin-top: -28px;
+  padding-bottom: 18px;
+  color: #85634a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase
+}
+
+.milan-location-wrap {
+  padding: 34px var(--mi-pad) 28px;
+  border-top: 1px solid var(--mi-line);
+  background: var(--mi-ivory)
+}
+
+.milan-location-wrap>h2 {
+  margin: 0 0 13px;
+  color: var(--mi-wine);
+  font-size: 18px;
+  font-weight: 600
+}
+
+.milan-location-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr .8fr auto;
+  background: #fffdf8;
+  border: 1px solid var(--mi-line)
+}
+
+.milan-location-panel>label {
+  min-width: 0;
+  padding: 15px 19px;
+  border-right: 1px solid var(--mi-line);
+  position: relative
+}
+
+.milan-location-panel label>span {
+  display: block;
+  margin-bottom: 8px;
+  color: #85634a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase
+}
+
+.milan-location-panel select,
+.milan-location-panel input {
+  width: 100%;
+  min-height: 28px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--mi-ink);
+  font-size: 15px
+}
+
+.milan-location-panel select:disabled,
+.milan-location-panel input:disabled {
+  opacity: .48
+}
+
+.milan-explore {
+  border: 0;
+  background: var(--mi-wine);
+  color: #fff;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-weight: 700
+}
+
+.milan-explore:hover {
+  background: #87304a
+}
+
+.milan-location-note {
+  margin: 9px 0 0;
+  color: var(--mi-muted);
+  font-size: 12px
+}
+
+.milan-location-error {
+  margin: 0 0 10px;
+  padding: 10px 13px;
+  background: #fff0f1;
+  color: #a91f39;
+  font-size: 13px
+}
+
+.milan-suggestions {
+  position: absolute;
+  z-index: 30;
+  top: 74px;
+  left: -1px;
+  right: -1px;
+  max-height: 230px;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid var(--mi-line);
+  box-shadow: 0 18px 40px rgba(54, 16, 30, .13)
+}
+
+.milan-suggestions button {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  border: 0;
+  border-bottom: 1px solid var(--mi-line);
+  background: #fff;
+  text-align: left
+}
+
+.milan-suggestions button:hover {
+  background: #fff7ea
+}
+
+.milan-suggestions small {
+  display: block;
+  margin-top: 4px;
+  color: var(--mi-muted)
+}
+
+.milan-suggestions>p {
+  margin: 0;
+  padding: 14px;
+  color: var(--mi-muted);
+  font-size: 13px
+}
+
+.milan-ticker {
+  overflow: hidden;
+  padding: 20px 0;
+  background: var(--mi-gold);
+  color: var(--mi-dark)
+}
+
+.milan-ticker span {
+  display: block;
+  width: max-content;
+  font-size: 18px;
+  letter-spacing: .12em;
+  word-spacing: 25px;
+  animation: milanTicker 28s linear infinite
+}
+
+@keyframes milanTicker {
+  to {
+    transform: translateX(-50%)
+  }
+}
+
+.milan-intro {
+  padding: 120px var(--mi-pad);
+  display: grid;
+  grid-template-columns: .35fr 1.3fr .65fr;
+  gap: 40px;
+  align-items: start
+}
+
+.milan-intro>span,
+.milan-section-heading>span,
+.milan-planning-copy>span,
+.milan-how>div>span {
+  color: #85634a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase
+}
+
+.milan-intro h2,
+.milan-section-heading h2,
+.milan-planning h2,
+.milan-how h2 {
+  margin: 0;
+  color: var(--mi-wine);
+  font: 500 clamp(47px, 5.8vw, 88px)/1.06 Georgia, "Times New Roman", serif;
+  letter-spacing: -.05em
+}
+
+.milan-intro h2 em,
+.milan-section-heading h2 em,
+.milan-planning h2 em,
+.milan-how h2 em {
+  font-weight: 400
+}
+
+.milan-intro>p,
+.milan-section-heading>p,
+.milan-planning-copy>p {
+  margin: 7px 0 0;
+  color: var(--mi-muted);
+  font-size: 17px;
+  line-height: 1.7
+}
+
+.milan-cities,
+.milan-team,
+.milan-results {
+  padding: 100px var(--mi-pad)
+}
+
+.milan-cities {
+  border-block: 1px solid var(--mi-line)
+}
+
+.milan-section-heading {
+  display: grid;
+  grid-template-columns: 1.25fr .65fr;
+  gap: 25px;
+  align-items: end;
+  margin-bottom: 42px
+}
+
+.milan-section-heading>span {
+  grid-column: 1/-1
+}
+
+.milan-city-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px
+}
+
+.milan-city-grid>button {
+  min-width: 0;
+  min-height: 270px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border: 1px solid var(--mi-line);
+  background: transparent;
+  color: var(--mi-wine);
+  transition: .3s
+}
+
+.milan-city-grid>button:hover {
+  background: var(--mi-ivory-deep);
+  transform: translateY(-5px)
+}
+
+.milan-city-grid span,
+.milan-team-grid button>span,
+.milan-vendor-grid article>span {
+  color: #85634a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase
+}
+
+.milan-city-grid h3 {
+  margin: 33px 0 11px;
+  font: 500 30px Georgia, "Times New Roman", serif
+}
+
+.milan-city-grid p {
+  margin: 0;
+  color: var(--mi-muted);
+  font-size: 14px;
+  line-height: 1.6
+}
+
+.milan-city-grid b {
+  margin-top: auto;
+  font-size: 13px
+}
+
+.milan-team {
+  background: var(--mi-ivory-deep)
+}
+
+.milan-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px
+}
+
+.milan-team-grid>button {
+  min-width: 0;
+  min-height: 315px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  border: 1px solid var(--mi-line);
+  background: var(--mi-paper);
+  color: var(--mi-wine);
+  transition: .3s
+}
+
+.milan-team-grid>button:hover,
+.milan-team-grid>button.active {
+  background: var(--mi-wine);
+  color: #fff8ec;
+  transform: translateY(-5px)
+}
+
+.milan-team-grid i {
+  margin: 24px 0 18px;
+  font-size: 40px;
+  font-style: normal
+}
+
+.milan-team-grid h3 {
+  margin: 0;
+  font: 500 27px Georgia, "Times New Roman", serif
+}
+
+.milan-team-grid p {
+  margin: 10px 0 24px;
+  color: var(--mi-muted);
+  font-size: 15px;
+  line-height: 1.55
+}
+
+.milan-team-grid button:hover p,
+.milan-team-grid button.active p {
+  color: #ead2d2
+}
+
+.milan-team-grid button>b {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid currentColor;
+  font-size: 13px
+}
+
+.milan-results {
+  border-bottom: 1px solid var(--mi-line)
+}
+
+.milan-vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px
+}
+
+.milan-vendor-grid article {
+  padding: 27px;
+  border: 1px solid var(--mi-line);
+  background: #fffdf8
+}
+
+.milan-vendor-grid h3 {
+  margin: 20px 0 8px;
+  color: var(--mi-wine);
+  font: 500 27px Georgia, "Times New Roman", serif
+}
+
+.milan-vendor-grid article>p {
+  margin: 0 0 14px;
+  color: var(--mi-muted)
+}
+
+.milan-vendor-grid article>small {
+  display: block;
+  min-height: 52px;
+  color: var(--mi-muted);
+  line-height: 1.6
+}
+
+.milan-vendor-grid article>div {
+  display: flex;
+  gap: 9px;
+  margin-top: 22px
+}
+
+.milan-vendor-grid button {
+  flex: 1;
+  padding: 11px;
+  border: 1px solid var(--mi-wine);
+  background: transparent;
+  color: var(--mi-wine)
+}
+
+.milan-vendor-grid button:last-child {
+  background: var(--mi-wine);
+  color: #fff
+}
+
+.milan-result-message {
+  padding: 30px;
+  border: 1px solid var(--mi-line);
+  color: var(--mi-muted);
+  text-align: center
+}
+
+.milan-planning {
+  padding: 110px var(--mi-pad);
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 65px;
+  align-items: center
+}
+
+.milan-planning-copy>span {
+  display: block;
+  margin-bottom: 23px
+}
+
+.milan-planning-copy>small {
+  display: block;
+  margin-top: 22px;
+  color: #85634a
+}
+
+.milan-checklist {
+  padding: 31px;
+  background: var(--mi-ivory-deep);
+  border: 1px solid var(--mi-line)
+}
+
+.milan-checklist>p {
+  margin: 0 0 20px;
+  color: var(--mi-muted)
+}
+
+.milan-checklist>p b {
+  margin-right: 10px;
+  color: var(--mi-wine);
+  font-size: 24px
+}
+
+.milan-checklist label {
+  display: flex;
+  gap: 14px;
+  padding: 20px 0;
+  border-top: 1px solid var(--mi-line);
+  cursor: pointer
+}
+
+.milan-checklist input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--mi-wine)
+}
+
+.milan-checklist label b {
+  display: block;
+  font-size: 16px
+}
+
+.milan-checklist label small {
+  display: block;
+  margin-top: 5px;
+  color: var(--mi-muted);
+  font-size: 13px;
+  line-height: 1.5
+}
+
+.milan-checklist input:checked+span {
+  opacity: .5
+}
+
+.milan-checklist input:checked+span b {
+  text-decoration: line-through
+}
+
+.milan-how {
+  padding: 110px var(--mi-pad);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  background: #fffdf8
+}
+
+.milan-how>div>span {
+  display: block;
+  margin-bottom: 22px
+}
+
+.milan-how ol {
+  list-style: none;
+  margin: 25px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--mi-line)
+}
+
+.milan-how li {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 13px;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--mi-line)
+}
+
+.milan-how li>span {
+  color: var(--mi-gold);
+  font-size: 12px
+}
+
+.milan-how h3 {
+  margin: 0 0 7px;
+  color: var(--mi-wine);
+  font-size: 20px
+}
+
+.milan-how li p {
+  margin: 0;
+  color: var(--mi-muted);
+  line-height: 1.55
+}
+
+.milan-vendor-cta {
+  position: relative;
+  min-height: 650px;
+  padding: 100px var(--mi-pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--mi-wine);
+  color: #fff
+}
+
+.milan-vendor-cta>p {
+  color: #d9b8c2;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .15em
+}
+
+.milan-vendor-cta h2 {
+  position: relative;
+  z-index: 1;
+  margin: 30px 0 42px;
+  font: 500 clamp(60px, 8vw, 120px)/.95 Georgia, "Times New Roman", serif;
+  letter-spacing: -.06em
+}
+
+.milan-vendor-cta h2 em {
+  color: #efd7ae;
+  font-weight: 400
+}
+
+.milan-vendor-cta button {
+  position: relative;
+  z-index: 1;
+  width: 210px;
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  border: 0;
+  border-bottom: 1px solid var(--mi-gold);
+  background: transparent;
+  color: #efd7ae
+}
+
+.milan-vendor-cta>b {
+  position: absolute;
+  right: -25px;
+  bottom: -60px;
+  font: 500 clamp(180px, 25vw, 360px) Georgia, "Times New Roman", serif;
+  opacity: .08
+}
+
+.milan-footer {
+  padding: 33px var(--mi-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  background: var(--mi-dark);
+  color: #d7bfc6
+}
+
+.milan-footer .milan-logo {
+  color: #fff
+}
+
+.milan-footer p {
+  font-size: 12px
+}
+
+.milan-footer p small {
+  display: block;
+  margin-top: 5px;
+  opacity: .7
+}
+
+.milan-footer nav {
+  display: flex;
+  gap: 20px;
+  font-size: 12px
+}
+
+@media(max-width:1050px) {
+  .milan-nav>nav {
+    display: none
+  }
+
+  .milan-hero {
+    grid-template-columns: minmax(0, .9fr) minmax(390px, 1.1fr)
+  }
+
+  .milan-hero h1 {
+    font-size: clamp(58px, 7.8vw, 82px)
+  }
+
+  .milan-mandap {
+    width: min(58vw, 650px)
+  }
+
+  .milan-location-panel {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .milan-location-panel>label {
+    border-bottom: 1px solid var(--mi-line)
+  }
+
+  .milan-explore {
+    min-height: 62px
+  }
+
+  .milan-city-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+  }
+
+  .milan-team-grid,
+  .milan-vendor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}
+
+@media(max-width:720px) {
+  .milan-nav {
+    height: 82px;
+    padding-inline: 16px;
+    gap: 10px
+  }
+
+  .milan-logo {
+    font-size: 27px
+  }
+
+  .milan-text-action {
+    display: none
+  }
+
+  .milan-nav-actions {
+    gap: 6px
+  }
+
+  .milan-account,
+  .milan-vendor-login {
+    min-width: 0;
+    min-height: 38px;
+    padding: 8px 10px;
+    font-size: 11px
+  }
+
+  .milan-hero {
+    min-height: calc(100svh - 82px);
+    padding: 52px 20px 0;
+    grid-template-columns: 1fr;
+    gap: 12px
+  }
+
+  .milan-hero-edition {
+    display: none
+  }
+
+  .milan-kicker {
+    margin-bottom: 22px;
+    font-size: 10px
+  }
+
+  .milan-hero h1 {
+    font-size: clamp(52px, 14vw, 72px)
+  }
+
+  .milan-hero h1 em {
+    margin-top: 10px
+  }
+
+  .milan-mandap {
+    width: min(112%, 500px);
+    margin: -15px -6% 0;
+    justify-self: center
+  }
+
+  .milan-mandap img {
+    max-height: 46svh
+  }
+
+  .milan-mandap figcaption {
+    margin-top: -12px;
+    padding-bottom: 14px
+  }
+
+  .milan-location-wrap {
+    padding: 28px 20px
+  }
+
+  .milan-location-panel {
+    grid-template-columns: 1fr
+  }
+
+  .milan-location-panel>label {
+    border-right: 0
+  }
+
+  .milan-explore {
+    justify-content: space-between;
+    padding: 17px
+  }
+
+  .milan-intro,
+  .milan-section-heading,
+  .milan-planning,
+  .milan-how {
+    grid-template-columns: 1fr
+  }
+
+  .milan-intro {
+    padding-block: 75px
+  }
+
+  .milan-intro h2,
+  .milan-section-heading h2,
+  .milan-planning h2,
+  .milan-how h2 {
+    font-size: 43px
+  }
+
+  .milan-cities,
+  .milan-team,
+  .milan-results,
+  .milan-planning,
+  .milan-how {
+    padding: 70px 20px
+  }
+
+  .milan-city-grid,
+  .milan-team-grid,
+  .milan-vendor-grid {
+    grid-template-columns: 1fr
+  }
+
+  .milan-city-grid>button {
+    min-height: 230px
+  }
+
+  .milan-team-grid>button {
+    min-height: 270px
+  }
+
+  .milan-vendor-cta {
+    min-height: 520px;
+    padding: 75px 20px
+  }
+
+  .milan-vendor-cta h2 {
+    font-size: 49px
+  }
+
+  .milan-footer {
+    align-items: flex-start;
+    flex-direction: column
+  }
+
+  .milan-footer nav {
+    flex-wrap: wrap
+  }
+
+  .milan-ticker span {
+    font-size: 14px
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto
+  }
+
+  .milan-ticker span {
+    animation: none
+  }
+
+  .milan-mandap img,
+  .milan-city-grid>button,
+  .milan-team-grid>button {
+    transition: none
+  }
+}
+
+/* Bigger desktop navbar */
+@media (min-width: 721px) {
+  .milan-nav {
+    height: 96px;
+  }
+
+  .milan-nav>nav {
+    gap: 44px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .milan-nav>nav a {
+    padding: 14px 0;
+  }
+
+  .milan-nav-actions {
+    gap: 12px;
+  }
+
+  .milan-account,
+  .milan-vendor-login {
+    min-height: 50px;
+    padding: 13px 22px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .milan-vendor-login {
+    min-width: 156px;
+    border-radius: 999px;
+  }
+
+  .milan-hero {
+    min-height: calc(100svh - 96px);
+  }
+}
+
+/* =========================================================
+   FINAL NAVBAR AND LOCATION SIZE
+========================================================= */
+
+@media (min-width: 721px) {
+  .milan-site .milan-nav {
+    height: 108px;
+  }
+
+  .milan-site .milan-nav>nav {
+    gap: 50px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .milan-site .milan-nav>nav a {
+    padding: 16px 0;
+  }
+
+  .milan-site .milan-nav-actions {
+    gap: 14px;
+  }
+
+  .milan-site .milan-account,
+  .milan-site .milan-vendor-login {
+    min-height: 55px;
+    padding: 15px 26px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .milan-site .milan-vendor-login {
+    min-width: 170px;
+    border-radius: 999px;
+  }
+
+  .milan-site .milan-hero {
+    min-height: calc(100svh - 108px);
+  }
+
+  .milan-site .milan-location-wrap {
+    padding-top: 42px;
+    padding-bottom: 34px;
+  }
+
+  .milan-site .milan-location-wrap>h2 {
+    margin-bottom: 16px;
+    font-size: 21px;
+  }
+
+  .milan-site .milan-location-panel {
+    grid-template-columns: 1fr 1fr 1.2fr;
+    min-height: 84px;
+  }
+
+  .milan-site .milan-location-panel>label {
+    padding: 19px 24px;
+  }
+
+  .milan-site .milan-location-panel label>span {
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  .milan-site .milan-location-panel select {
+    min-height: 34px;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .milan-site .milan-explore {
+    min-height: 84px;
+    padding: 0 32px;
+    justify-content: space-between;
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   CONTINUOUS STATES TICKER
+========================================================= */
+
+.milan-site .milan-ticker {
+  width: 100%;
+  overflow: hidden;
+  padding: 19px 0;
+  background: var(--mi-gold);
+}
+
+.milan-site .milan-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: milanStateTicker 55s linear infinite;
+  will-change: transform;
+}
+
+.milan-site .milan-ticker-track span {
+  display: block;
+  flex-shrink: 0;
+  padding-right: 32px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  word-spacing: 18px;
+  white-space: nowrap;
+  animation: none;
+}
+
+@keyframes milanStateTicker {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================================================
+   ROMANTIC LOVE LINES
+========================================================= */
+
+.milan-site .milan-love-lines {
+  position: relative;
+  min-height: 610px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 90px var(--mi-pad);
+  border-block: 1px solid var(--mi-line);
+  background:
+    radial-gradient(circle at 75% 40%, rgba(196, 145, 61, .13), transparent 28%),
+    linear-gradient(120deg, #fffaf1 0%, var(--mi-ivory) 58%, #f7ecdd 100%);
+  text-align: center;
+}
+
+.milan-site .milan-love-decoration {
+  position: absolute;
+  top: 50%;
+  right: 6%;
+  transform: translateY(-55%);
+  color: rgba(113, 28, 56, .045);
+  font: italic 500 clamp(300px, 38vw, 570px) Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.milan-site .milan-love-kicker {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 50px;
+  color: var(--mi-gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .2em;
+}
+
+.milan-site .milan-love-line-stage {
+  position: relative;
+  z-index: 2;
+  width: min(1100px, 100%);
+  min-height: 275px;
+}
+
+.milan-site .milan-love-line-stage>p {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: var(--mi-wine);
+  font: 500 clamp(48px, 6vw, 94px)/1.03 Georgia, serif;
+  letter-spacing: -.045em;
+  opacity: 0;
+  transform: translateY(28px);
+  animation: milanLoveLine 60s ease-in-out infinite;
+}
+
+.milan-site .milan-love-line-stage em,
+.milan-site .milan-love-line-stage>p>span {
+  display: block;
+  color: #531429;
+  font-weight: 400;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(2) {
+  animation-delay: 6s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(3) {
+  animation-delay: 12s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(4) {
+  animation-delay: 18s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(5) {
+  animation-delay: 24s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(6) {
+  animation-delay: 30s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(7) {
+  animation-delay: 36s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(8) {
+  animation-delay: 42s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(9) {
+  animation-delay: 48s;
+}
+
+.milan-site .milan-love-line-stage>p:nth-child(10) {
+  animation-delay: 54s;
+}
+
+@keyframes milanLoveLine {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  1.5%,
+  8% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  10%,
+  100% {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+}
+
+.milan-site .milan-love-signature {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 42px;
+  color: #926d4f;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .19em;
+}
+
+.milan-site .milan-love-signature span {
+  width: 45px;
+  height: 1px;
+  background: var(--mi-gold);
+}
+
+@media (max-width: 720px) {
+  .milan-site .milan-ticker-track {
+    animation-duration: 42s;
+  }
+
+  .milan-site .milan-ticker-track span {
+    font-size: 14px;
+  }
+
+  .milan-site .milan-love-lines {
+    min-height: 540px;
+    padding: 70px 22px;
+  }
+
+  .milan-site .milan-love-kicker {
+    margin-bottom: 38px;
+    font-size: 10px;
+  }
+
+  .milan-site .milan-love-line-stage {
+    min-height: 290px;
+  }
+
+  .milan-site .milan-love-line-stage>p {
+    font-size: clamp(42px, 12.5vw, 62px);
+    line-height: 1.06;
+  }
+
+  .milan-site .milan-love-signature {
+    gap: 11px;
+    margin-top: 25px;
+    font-size: 9px;
+  }
+
+  .milan-site .milan-love-signature span {
+    width: 25px;
+  }
+
+  .milan-site .milan-love-decoration {
+    right: -15%;
+    font-size: 430px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .milan-site .milan-ticker-track {
+    animation: none;
+  }
+
+  .milan-site .milan-love-line-stage>p {
+    animation: none;
+  }
+
+  .milan-site .milan-love-line-stage>p:first-child {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================================================
+   SELECTED HEART 03 — FLOWING RIBBON
+========================================================= */
+
+.milan-site .milan-love-lines {
+  overflow: hidden;
+  min-height: 780px;
+  padding-inline: max(18px, var(--mi-pad));
+}
+
+.milan-site .milan-love-heart {
+  width: min(840px, calc(100vw - 48px));
+  max-width: 100%;
+  box-sizing: border-box;
+  perspective: 1400px;
+}
+
+.milan-site .milan-love-heart-art {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: milanRibbonRotate 16s linear infinite;
+}
+
+.milan-site .milan-love-heart-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  animation: none;
+  filter: none;
+}
+
+.milan-site .milan-ribbon-shadow,
+.milan-site .milan-ribbon-main,
+.milan-site .milan-ribbon-shine {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.milan-site .milan-ribbon-shadow {
+  stroke: rgba(76, 17, 39, .2);
+  stroke-width: 38;
+  filter: url(#milanRibbonShadow);
+}
+
+.milan-site .milan-ribbon-main {
+  stroke: url(#milanRibbonGradient);
+  stroke-width: 31;
+}
+
+.milan-site .milan-ribbon-shine {
+  stroke: rgba(255, 246, 205, .94);
+  stroke-width: 5;
+  stroke-dasharray: 115 2050;
+  animation: milanRibbonFlow 5.8s linear infinite;
+  filter: drop-shadow(0 0 7px rgba(255, 230, 151, .9));
+}
+
+.milan-site .milan-love-heart-glow {
+  z-index: 0;
+  inset: 18% 20% 12%;
+}
+
+.milan-site .milan-love-heart-content {
+  z-index: 4;
+  width: min(590px, 65%);
+}
+
+.milan-site .milan-heart-sparkles {
+  z-index: 3;
+}
+
+@keyframes milanRibbonFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -2165;
+  }
+}
+
+@keyframes milanRibbonRotate {
+  from {
+    transform: rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg) rotateZ(0deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .milan-site .milan-love-lines {
+    min-height: 405px;
+    padding-inline: 10px;
+  }
+
+  .milan-site .milan-love-heart {
+    width: min(100%, calc(100vw - 20px));
+  }
+
+  .milan-site .milan-ribbon-shadow {
+    stroke-width: 24;
+  }
+
+  .milan-site .milan-ribbon-main {
+    stroke-width: 20;
+  }
+
+  .milan-site .milan-ribbon-shine {
+    stroke-width: 3;
+  }
+
+  .milan-site .milan-love-heart-content {
+    width: 66%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .milan-site .milan-love-heart-art,
+  .milan-site .milan-ribbon-shine {
+    animation: none;
+  }
+}
+
+/* Final text-fit correction: ribbon stays still, colour continues flowing. */
+.milan-site .milan-love-heart-art {
+  transform: none;
+  animation: none;
+}
+
+.milan-site .milan-love-heart-content {
+  width: min(520px, 58%);
+  padding-top: 0;
+  transform: translateY(-5%);
+}
+
+.milan-site .milan-love-monogram {
+  margin-bottom: 8px;
+}
+
+.milan-site .milan-love-kicker {
+  margin-bottom: 10px;
+}
+
+.milan-site .milan-love-line-stage {
+  min-height: 190px;
+}
+
+.milan-site .milan-love-line-stage>p {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 8px;
+  font-size: clamp(32px, 3.6vw, 52px);
+  line-height: 1;
+  letter-spacing: -.035em;
+  overflow-wrap: normal;
+  word-break: normal;
+  text-wrap: balance;
+}
+
+.milan-site .milan-love-signature {
+  margin-top: 8px;
+}
+
+@media (max-width: 720px) {
+  .milan-site .milan-love-heart-content {
+    width: 60%;
+    transform: translateY(-4%);
+  }
+
+  .milan-site .milan-love-monogram {
+    margin-bottom: 3px;
+  }
+
+  .milan-site .milan-love-kicker {
+    margin-bottom: 4px;
+  }
+
+  .milan-site .milan-love-line-stage {
+    min-height: 118px;
+  }
+
+  .milan-site .milan-love-line-stage>p {
+    padding: 0 4px;
+    font-size: clamp(20px, 6vw, 28px);
+    line-height: 1.02;
+  }
+
+  .milan-site .milan-love-signature {
+    margin-top: 3px;
+  }
+}
+
+/* =========================================================
+   HEART-SHAPED LOVE STORY
+========================================================= */
+
+.milan-site .milan-love-lines {
+  min-height: 850px;
+  padding: 46px var(--mi-pad);
+  background:
+    radial-gradient(circle at 50% 43%, rgba(196, 145, 61, .18), transparent 34%),
+    radial-gradient(circle at 12% 18%, rgba(116, 30, 59, .06), transparent 22%),
+    radial-gradient(circle at 88% 78%, rgba(116, 30, 59, .06), transparent 22%),
+    linear-gradient(120deg, #fffaf1 0%, var(--mi-ivory) 52%, #f4e5d6 100%);
+}
+
+.milan-site .milan-love-lines::before,
+.milan-site .milan-love-lines::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(169, 111, 38, .18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.milan-site .milan-love-lines::before {
+  top: -115px;
+  left: -75px;
+  box-shadow: 0 0 0 28px rgba(169, 111, 38, .035), 0 0 0 58px rgba(169, 111, 38, .025);
+}
+
+.milan-site .milan-love-lines::after {
+  right: -75px;
+  bottom: -115px;
+  box-shadow: 0 0 0 28px rgba(169, 111, 38, .035), 0 0 0 58px rgba(169, 111, 38, .025);
+}
+
+.milan-site .milan-love-heart {
+  position: relative;
+  isolation: isolate;
+  width: min(940px, 100%);
+  aspect-ratio: 1000 / 850;
+  display: grid;
+  place-items: center;
+}
+
+.milan-site .milan-love-heart-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter:
+    drop-shadow(0 28px 48px rgba(116, 30, 59, .15)) drop-shadow(0 5px 8px rgba(169, 111, 38, .1));
+  animation: milanHeartBeat 5s ease-in-out infinite;
+}
+
+.milan-site .milan-heart-fill {
+  fill: url(#milanHeartFill);
+  stroke: none;
+}
+
+.milan-site .milan-heart-outer {
+  fill: none;
+  stroke: url(#milanHeartGradient);
+  stroke-width: 8;
+  vector-effect: non-scaling-stroke;
+}
+
+.milan-site .milan-heart-inner {
+  fill: none;
+  stroke: rgba(169, 111, 38, .56);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 10;
+  vector-effect: non-scaling-stroke;
+  animation: milanHeartDash 18s linear infinite;
+}
+
+.milan-site .milan-love-heart-glow {
+  position: absolute;
+  inset: 13% 17% 9%;
+  z-index: -1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, .88), transparent 34%),
+    radial-gradient(circle, rgba(196, 145, 61, .22), transparent 69%);
+  filter: blur(20px);
+  animation: milanHeartGlow 5s ease-in-out infinite;
+}
+
+.milan-site .milan-heart-sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  color: #bb8432;
+  pointer-events: none;
+}
+
+.milan-site .milan-heart-sparkles i {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font-style: normal;
+  font-size: 24px;
+  text-shadow: 0 0 15px rgba(239, 209, 141, .9);
+  animation: milanSparkle 3.8s ease-in-out infinite;
+}
+
+.milan-site .milan-heart-sparkles i:nth-child(1) {
+  top: 14%;
+  left: 21%;
+}
+
+.milan-site .milan-heart-sparkles i:nth-child(2) {
+  top: 8%;
+  right: 25%;
+  animation-delay: -.7s;
+}
+
+.milan-site .milan-heart-sparkles i:nth-child(3) {
+  top: 29%;
+  right: 10%;
+  animation-delay: -1.5s;
+}
+
+.milan-site .milan-heart-sparkles i:nth-child(4) {
+  top: 50%;
+  right: 13%;
+  animation-delay: -2.2s;
+}
+
+.milan-site .milan-heart-sparkles i:nth-child(5) {
+  bottom: 20%;
+  right: 27%;
+  animation-delay: -1s;
+}
+
+.milan-site .milan-heart-sparkles i:nth-child(6) {
+  bottom: 22%;
+  left: 25%;
+  animation-delay: -2.7s;
+}
+
+.milan-site .milan-heart-sparkles i:nth-child(7) {
+  top: 47%;
+  left: 12%;
+  animation-delay: -1.8s;
+}
+
+.milan-site .milan-heart-sparkles i:nth-child(8) {
+  top: 27%;
+  left: 9%;
+  animation-delay: -.3s;
+}
+
+.milan-site .milan-love-heart-content {
+  position: relative;
+  z-index: 2;
+  width: min(620px, 66%);
+  padding-top: 3%;
+  text-align: center;
+}
+
+.milan-site .milan-love-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 13px;
+  color: #9c7338;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .22em;
+}
+
+.milan-site .milan-love-monogram b {
+  position: relative;
+  color: var(--mi-wine);
+  font: 400 17px Georgia, serif;
+  animation: milanMiniHeart 2.4s ease-in-out infinite;
+}
+
+.milan-site .milan-love-monogram b::before,
+.milan-site .milan-love-monogram b::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(169, 111, 38, .65));
+}
+
+.milan-site .milan-love-monogram b::before {
+  right: calc(100% + 8px);
+}
+
+.milan-site .milan-love-monogram b::after {
+  left: calc(100% + 8px);
+  transform: rotate(180deg);
+}
+
+.milan-site .milan-love-kicker {
+  margin-bottom: 18px;
+  color: #8d5f28;
+}
+
+.milan-site .milan-love-line-stage {
+  width: 100%;
+  min-height: 235px;
+}
+
+.milan-site .milan-love-line-stage>p {
+  font-size: clamp(40px, 4.5vw, 66px);
+  line-height: 1.01;
+  text-wrap: balance;
+  text-shadow: 0 2px 20px rgba(116, 30, 59, .08);
+}
+
+.milan-site .milan-love-signature {
+  justify-content: center;
+  margin-top: 17px;
+}
+
+@keyframes milanHeartBeat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  43% {
+    transform: scale(1.012);
+  }
+
+  51% {
+    transform: scale(1);
+  }
+
+  59% {
+    transform: scale(1.008);
+  }
+}
+
+@keyframes milanHeartGlow {
+
+  0%,
+  100% {
+    opacity: .55;
+    transform: scale(.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes milanHeartDash {
+  to {
+    stroke-dashoffset: -140;
+  }
+}
+
+@keyframes milanSparkle {
+
+  0%,
+  100% {
+    opacity: .28;
+    transform: scale(.65) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12) rotate(45deg);
+  }
+}
+
+@keyframes milanMiniHeart {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.22);
+  }
+
+  28% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.13);
+  }
+}
+
+@media (max-width: 720px) {
+  .milan-site .milan-love-lines {
+    min-height: 420px;
+    padding: 40px 8px;
+  }
+
+  .milan-site .milan-love-heart {
+    width: 100%;
+  }
+
+  .milan-site .milan-heart-outer {
+    stroke-width: 5;
+  }
+
+  .milan-site .milan-heart-inner {
+    stroke-width: 1;
+  }
+
+  .milan-site .milan-love-heart-content {
+    width: 72%;
+    padding-top: 4%;
+  }
+
+  .milan-site .milan-love-monogram {
+    gap: 8px;
+    margin-bottom: 5px;
+    font-size: 6px;
+  }
+
+  .milan-site .milan-love-monogram b {
+    font-size: 12px;
+  }
+
+  .milan-site .milan-love-monogram b::before,
+  .milan-site .milan-love-monogram b::after {
+    width: 14px;
+  }
+
+  .milan-site .milan-love-kicker {
+    margin-bottom: 7px;
+    font-size: 7px;
+    letter-spacing: .15em;
+  }
+
+  .milan-site .milan-love-line-stage {
+    min-height: 148px;
+  }
+
+  .milan-site .milan-love-line-stage>p {
+    font-size: clamp(25px, 7.5vw, 36px);
+    line-height: 1.04;
+  }
+
+  .milan-site .milan-love-signature {
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 7px;
+    letter-spacing: .12em;
+  }
+
+  .milan-site .milan-love-signature span {
+    width: 18px;
+  }
+
+  .milan-site .milan-heart-sparkles i {
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .milan-site .milan-love-heart-outline,
+  .milan-site .milan-love-heart-glow,
+  .milan-site .milan-heart-inner,
+  .milan-site .milan-heart-sparkles i,
+  .milan-site .milan-love-monogram b {
+    animation: none;
+  }
+}
+
+/* Selected design 03 final overrides — keep this block last. */
+/* Text-fit lock: heart is static; only the ribbon colour keeps flowing. */
+.milan-site .milan-love-heart-art {
+  transform: none !important;
+  animation: none !important;
+}
+
+.milan-site .milan-love-heart-content {
+  width: min(520px, 58%) !important;
+  padding-top: 0 !important;
+  transform: translateY(-5%);
+}
+
+.milan-site .milan-love-monogram {
+  margin-bottom: 8px !important;
+}
+
+.milan-site .milan-love-kicker {
+  margin-bottom: 10px !important;
+}
+
+.milan-site .milan-love-line-stage {
+  min-height: 190px !important;
+}
+
+.milan-site .milan-love-line-stage>p {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 8px;
+  font-size: clamp(32px, 3.6vw, 52px) !important;
+  line-height: 1 !important;
+  letter-spacing: -.035em;
+  overflow-wrap: normal;
+  word-break: normal;
+  text-wrap: balance;
+}
+
+.milan-site .milan-love-signature {
+  margin-top: 8px !important;
+}
+
+@media (max-width: 720px) {
+  .milan-site .milan-love-heart-content {
+    width: 60% !important;
+    transform: translateY(-4%);
+  }
+
+  .milan-site .milan-love-monogram {
+    margin-bottom: 3px !important;
+  }
+
+  .milan-site .milan-love-kicker {
+    margin-bottom: 4px !important;
+  }
+
+  .milan-site .milan-love-line-stage {
+    min-height: 118px !important;
+  }
+
+  .milan-site .milan-love-line-stage>p {
+    padding: 0 4px;
+    font-size: clamp(20px, 6vw, 28px) !important;
+    line-height: 1.02 !important;
+  }
+
+  .milan-site .milan-love-signature {
+    margin-top: 3px !important;
+  }
+}
+
+.milan-site .milan-love-lines {
+  overflow: hidden;
+  min-height: 780px;
+  padding-inline: max(18px, var(--mi-pad));
+}
+
+.milan-site .milan-love-heart {
+  width: min(840px, calc(100vw - 48px));
+  max-width: 100%;
+  box-sizing: border-box;
+  perspective: 1400px;
+}
+
+.milan-site .milan-love-heart-art {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: milanRibbonRotate 16s linear infinite;
+}
+
+.milan-site .milan-love-heart-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  animation: none;
+  filter: none;
+}
+
+.milan-site .milan-ribbon-shadow,
+.milan-site .milan-ribbon-main,
+.milan-site .milan-ribbon-shine {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.milan-site .milan-ribbon-shadow {
+  stroke: rgba(76, 17, 39, .2);
+  stroke-width: 38;
+  filter: url(#milanRibbonShadow);
+}
+
+.milan-site .milan-ribbon-main {
+  stroke: url(#milanRibbonGradient);
+  stroke-width: 31;
+}
+
+.milan-site .milan-ribbon-shine {
+  stroke: rgba(255, 246, 205, .94);
+  stroke-width: 5;
+  stroke-dasharray: 115 2050;
+  animation: milanRibbonFlow 5.8s linear infinite;
+  filter: drop-shadow(0 0 7px rgba(255, 230, 151, .9));
+}
+
+.milan-site .milan-love-heart-glow {
+  z-index: 0;
+  inset: 18% 20% 12%;
+}
+
+.milan-site .milan-love-heart-content {
+  z-index: 4;
+  width: min(590px, 65%);
+}
+
+.milan-site .milan-heart-sparkles {
+  z-index: 3;
+}
+
+@media (max-width: 720px) {
+  .milan-site .milan-love-lines {
+    min-height: 405px;
+    padding-inline: 10px;
+  }
+
+  .milan-site .milan-love-heart {
+    width: min(100%, calc(100vw - 20px));
+  }
+
+  .milan-site .milan-ribbon-shadow {
+    stroke-width: 24;
+  }
+
+  .milan-site .milan-ribbon-main {
+    stroke-width: 20;
+  }
+
+  .milan-site .milan-ribbon-shine {
+    stroke-width: 3;
+  }
+
+  .milan-site .milan-love-heart-content {
+    width: 66%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .milan-site .milan-love-heart-art,
+  .milan-site .milan-ribbon-shine {
+    animation: none;
+  }
+}
+
+.milan-site .milan-dashboard-menu {
+  position: relative;
+  color: var(--mi-wine);
+}
+
+.milan-site .milan-dashboard-menu summary {
+  padding: 16px 0;
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.milan-site .milan-dashboard-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.milan-site .milan-dashboard-options {
+  position: absolute;
+  z-index: 120;
+  top: 100%;
+  right: 0;
+  width: 210px;
+  padding: 8px;
+  background: #fffdf9;
+  border: 1px solid var(--mi-line);
+  border-radius: 10px;
+  box-shadow: 0 14px 30px rgba(54, 16, 30, .16);
+}
+
+.milan-site .milan-dashboard-options button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  background: transparent;
+  color: var(--mi-wine);
+  text-align: left;
+  cursor: pointer;
+}
+
+.milan-site .milan-dashboard-options button:hover {
+  background: #f8ecec;
+}
+
+.milan-site .milan-customer-greeting {
+  color: var(--mi-wine);
+  font-weight: 600;
+}
+
+@media (max-width: 1050px) {
+  .milan-site .milan-nav>nav:has(.milan-dashboard-menu) {
+    display: flex;
+  }
+
+  .milan-site .milan-nav>nav:has(.milan-dashboard-menu)>a {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .milan-site .milan-customer-greeting {
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+
+  .milan-site .milan-dashboard-menu summary {
+    padding: 8px 0;
+    font-size: 13px;
+  }
+
+  .milan-site .milan-dashboard-options {
+    left: 0;
+    right: auto;
+  }
+
+  .milan-site .milan-nav-actions .milan-text-action {
+    display: inline-flex;
+  }
+}

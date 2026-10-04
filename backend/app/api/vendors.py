@@ -263,7 +263,95 @@ def get_my_vendor_profile(
             "profile_views": vendor.profile_views
         }
     }
+# =========================================================
+# UPDATE LOGGED-IN VENDOR PROFILE
+# PUT /vendors/me
+# IMPORTANT: KEEP ABOVE /{vendor_id}
+# =========================================================
 
+@router.put("/me")
+def update_my_vendor_profile(
+    vendor_data: VendorCreate,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    user_id = int(current_user.get("sub"))
+
+    vendor = (
+        db.query(Vendor)
+        .filter(Vendor.user_id == user_id)
+        .first()
+    )
+
+    if not vendor:
+        raise HTTPException(
+            status_code=404,
+            detail="Vendor profile not found"
+        )
+
+    vendor.business_name = vendor_data.business_name.strip()
+    vendor.category = vendor_data.category.strip()
+    vendor.phone = vendor_data.phone.strip()
+
+    vendor.address = (
+        vendor_data.address.strip()
+        if vendor_data.address
+        else None
+    )
+
+    vendor.state = (
+        vendor_data.state.strip()
+        if vendor_data.state
+        else None
+    )
+
+    vendor.district = (
+        vendor_data.district.strip()
+        if vendor_data.district
+        else None
+    )
+
+    vendor.area = (
+        vendor_data.area.strip()
+        if vendor_data.area
+        else None
+    )
+
+    vendor.pincode = (
+        vendor_data.pincode.strip()
+        if vendor_data.pincode
+        else None
+    )
+
+    vendor.description = (
+        vendor_data.description.strip()
+        if vendor_data.description
+        else None
+    )
+
+    # is_verified और profile_views को यहाँ change नहीं करना है.
+
+    db.commit()
+    db.refresh(vendor)
+
+    return {
+        "message": "Vendor profile updated successfully",
+        "vendor": {
+            "id": vendor.id,
+            "user_id": vendor.user_id,
+            "business_name": vendor.business_name,
+            "category": vendor.category,
+            "phone": vendor.phone,
+            "address": vendor.address,
+            "state": vendor.state,
+            "district": vendor.district,
+            "area": vendor.area,
+            "pincode": vendor.pincode,
+            "description": vendor.description,
+            "is_verified": vendor.is_verified,
+            "profile_views": vendor.profile_views
+        }
+    }
 
 # =========================================================
 # UPLOAD VENDOR PORTFOLIO
