@@ -1,699 +1,1517 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,500&display=swap");
 
+
+
 .milan-auth {
+
   --cream: #fbf7ee;
+
   --wine: #6f1735;
+
   --wine-dark: #491023;
+
   --gold: #c79b55;
+
   --gold-soft: rgba(199, 155, 85, .36);
+
   min-height: 100svh;
+
   display: grid;
+
   grid-template-columns: 48fr 52fr !important;
+
   overflow: hidden;
+
   background: var(--wine);
+
   color: #fff9f2;
+
   font-family: "DM Sans", sans-serif;
+
 }
+
+
 
 .milan-auth *,
+
 .milan-auth *::before,
+
 .milan-auth *::after {
+
   box-sizing: border-box;
+
 }
+
+
 
 .milan-auth button,
+
 .milan-auth input {
+
   font: inherit;
+
 }
+
+
 
 .milan-auth button {
+
   cursor: pointer;
+
 }
+
+
 
 .milan-auth-story {
+
   position: relative;
+
   min-width: 0;
+
   min-height: 100svh;
+
   overflow: hidden;
+
   background: #000;
+
   isolation: isolate;
+
 }
+
+
 
 .milan-auth-story::after {
+
   content: "";
+
   position: absolute;
+
   z-index: 7;
+
   inset: 0 0 0 auto;
+
   width: 3px;
+
   background: linear-gradient(180deg, #e1bf78, #9f6828 48%, #e0bc71);
+
   box-shadow: -3px 0 12px rgba(139, 89, 27, .18);
+
 }
+
+
 
 .milan-auth-story::before {
+
   display: none;
+
 }
+
+
 
 .milan-auth-divider {
+
   display: none;
+
 }
+
+
 
 .milan-auth-divider::before {
+
   content: "";
+
   position: absolute;
+
   top: -51px;
+
   right: -8px;
+
   width: 88px;
+
   height: 102px;
+
   border: 3px solid var(--gold);
+
   border-radius: 0 0 0 52px;
+
   border-top: 0;
+
   border-right: 0;
+
 }
+
+
 
 .milan-auth-divider::after {
+
   content: "";
+
   position: absolute;
+
   top: 50px;
+
   right: -2px;
+
   width: 28px;
+
   height: 58px;
+
   border: 3px solid var(--gold);
+
   border-radius: 30px 0 0 30px;
+
   border-right: 0;
+
 }
+
+
 
 .milan-auth-divider i {
+
   position: absolute;
+
   right: -1px;
+
   width: 18px;
+
   height: 36px;
+
   border: 3px solid var(--gold);
+
   border-radius: 24px 0 0 24px;
+
   border-right: 0;
+
 }
+
+
 
 .milan-auth-divider i:nth-child(1) {
+
   top: 108px;
+
 }
+
+
 
 .milan-auth-divider i:nth-child(2) {
+
   top: 142px;
+
   width: 30px;
+
   height: 58px;
+
 }
+
+
 
 .milan-auth-divider i:nth-child(3) {
+
   top: 198px;
+
 }
+
+
 
 .milan-auth-logo {
+
   position: absolute;
+
   z-index: 10;
+
   top: clamp(24px, 4vh, 44px);
+
   left: clamp(25px, 4vw, 68px);
+
   padding: 0;
+
   border: 0;
+
   background: transparent;
+
   color: #e3bf75;
+
   font: 600 clamp(1.65rem, 2.3vw, 2.35rem)/1 "Playfair Display", serif;
+
 }
+
+
 
 .milan-auth-logo span {
+
   color: var(--gold);
+
 }
+
+
 
 .milan-auth-mandala {
+
   position: absolute;
+
   z-index: 1;
+
   top: 50%;
+
   left: 50%;
+
   width: min(82%, 680px);
+
   aspect-ratio: 1;
+
   transform: translate(-50%, -50%);
+
   filter: drop-shadow(0 0 22px rgba(194, 143, 62, .16));
+
   animation: milanMandalaBreathe 4.5s ease-in-out infinite;
+
 }
+
+
 
 .milan-auth-mandala::after {
+
   content: "";
+
   position: absolute;
+
   z-index: 4;
+
   inset: 0;
+
   /* One narrow gold wave moves from the flower's centre through each outer layer. */
+
   background: radial-gradient(circle closest-side at center,
+
       transparent calc(var(--milan-wave-radius) - 1.8%),
+
       rgba(239, 189, 99, .55) calc(var(--milan-wave-radius) - 1.1%),
+
       #fff4ce var(--milan-wave-radius),
+
       rgba(239, 189, 99, .55) calc(var(--milan-wave-radius) + 1.1%),
+
       transparent calc(var(--milan-wave-radius) + 1.8%));
+
   -webkit-mask: url("../assets/milan-royal-mandala.png") center / contain no-repeat;
+
   mask: url("../assets/milan-royal-mandala.png") center / contain no-repeat;
+
   animation: milanMandalaSpin 48s linear infinite, milanPatternWave 6.5s ease-out infinite;
+
   pointer-events: none;
+
 }
+
+
 
 .milan-auth-mandala img {
+
   display: block;
+
   width: 100%;
+
   height: 100%;
+
   object-fit: contain;
+
   animation: milanMandalaSpin 48s linear infinite;
+
   transform-origin: 50% 50%;
+
   user-select: none;
+
   pointer-events: none;
+
 }
+
+
 
 .milan-auth-story-copy {
+
   position: absolute;
+
   z-index: 5;
+
   left: 50%;
+
   top: auto;
+
   bottom: clamp(28px, 5vh, 54px);
+
   width: min(84%, 520px);
+
   padding: 18px 24px 17px;
+
   transform: translateX(-50%);
+
   border: 1px solid rgba(199, 155, 85, .42);
+
   background: rgba(255, 253, 247, .82);
+
   box-shadow: 0 16px 45px rgba(104, 28, 51, .08);
+
   backdrop-filter: blur(9px);
+
   text-align: center;
+
   color: var(--wine);
+
   animation: milanStoryReveal .75s .08s ease both;
+
 }
+
+
 
 .milan-auth-story-copy h1 {
+
   margin: 0;
+
   font: 600 clamp(2rem, 3vw, 3.35rem)/.9 "Playfair Display", serif;
+
   letter-spacing: -.045em;
+
 }
+
+
 
 .milan-auth-story-copy h1 em {
+
   font-weight: 500;
+
   white-space: nowrap;
+
 }
+
+
 
 .milan-auth-story-copy>b {
+
   display: block;
+
   width: 38px;
+
   height: 1px;
+
   margin: 15px auto 13px;
+
   background: var(--gold);
+
 }
+
+
 
 .milan-auth-story-copy p {
+
   display: inline;
+
   margin: 0 5px;
+
   color: #80654d;
+
   font-size: clamp(.48rem, .56vw, .61rem);
+
   font-weight: 600;
+
   letter-spacing: .13em;
+
 }
+
+
 
 .milan-auth-panel {
+
   position: relative;
+
   min-width: 0;
+
   min-height: 100svh;
+
   padding: clamp(22px, 3vh, 36px) clamp(28px, 5vw, 86px);
+
   display: flex;
+
   overflow-y: auto;
+
   background: #711331;
+
 }
+
+
 
 .milan-auth-panel::after {
+
   display: none;
+
 }
+
+
 
 .milan-auth-back {
+
   position: absolute;
+
   z-index: 3;
+
   top: clamp(25px, 4vh, 42px);
+
   right: clamp(28px, 5vw, 82px);
+
   padding: 5px 0 8px;
+
   border: 0;
+
   border-bottom: 1px solid rgba(255, 245, 229, .45);
+
   background: transparent;
+
   color: #fff7eb;
+
   font-size: .76rem;
+
 }
+
+
 
 .milan-auth-card {
+
   position: relative;
+
   z-index: 2;
+
   width: min(86%, 820px);
+
   margin: 0 auto;
+
   padding: clamp(132px, 20vh, 185px) 0 34px;
+
   animation: milanCardReveal .7s .13s ease both;
+
 }
+
+
 
 .milan-auth-eyebrow {
+
   margin: 0 0 12px;
+
   color: #e0bb7a;
+
   font-size: .66rem;
+
   font-weight: 600;
+
   letter-spacing: .2em;
+
 }
+
+
 
 .milan-auth-card h2 {
+
   margin: 0;
+
   color: #fffaf2;
+
   font: 600 clamp(2.35rem, 3.4vw, 3.9rem)/.98 "Playfair Display", serif;
+
   letter-spacing: -.045em;
+
 }
+
+
 
 .milan-auth-card h2 em {
+
   font-weight: 500;
+
 }
+
+
 
 .milan-auth-intro {
+
   margin: 13px 0 24px;
+
   color: rgba(255, 246, 236, .72);
+
   font-size: .8rem;
+
   line-height: 1.6;
+
 }
+
+
 
 .milan-auth-role-switch {
+
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   margin-bottom: 21px;
+
   border: 1px solid rgba(255, 245, 225, .55);
+
   background: #fffaf1;
+
 }
+
+
 
 .milan-auth-role-switch button {
+
   min-width: 0;
+
   min-height: 68px;
+
   padding: 10px 16px;
+
   display: grid;
+
   grid-template-columns: 29px 1fr;
+
   grid-template-rows: auto auto;
+
   align-items: center;
+
   border: 0;
+
   background: #fffaf1;
+
   color: #8b6f74;
+
   text-align: left;
-  transition: color .25s ease, background .25s ease, transform .25s ease;
+
+  transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+
 }
+
+
 
 .milan-auth-role-switch button+button {
+
   border-left: 1px solid rgba(111, 23, 53, .16);
+
 }
+
+
 
 .milan-auth-role-switch button>span {
+
   grid-row: 1 / 3;
+
   color: var(--wine);
+
   font-size: 1.05rem;
+
   text-align: center;
+
 }
+
+
 
 .milan-auth-role-switch button>b {
+
   color: var(--wine);
+
   font-size: .78rem;
+
 }
+
+
 
 .milan-auth-role-switch button>small {
+
   overflow: hidden;
+
   font-size: .59rem;
+
   text-overflow: ellipsis;
+
   white-space: nowrap;
+
 }
+
+
 
 .milan-auth-role-switch button[aria-selected="true"] {
+
   background: rgba(54, 8, 25, .58);
+
   color: #e7ccd3;
+
 }
+
+
 
 .milan-auth-role-switch button[aria-selected="true"]>span,
+
 .milan-auth-role-switch button[aria-selected="true"]>b {
+
   color: #fff;
+
 }
+
+
 
 .milan-auth-card form>label,
+
 .milan-auth-form-row>label {
+
   display: block;
+
   margin-bottom: 14px;
+
 }
+
+
 
 .milan-auth-card form label>span:first-child {
+
   display: block;
+
   margin-bottom: 7px;
+
   color: #edcf98;
+
   font-size: .61rem;
+
   font-weight: 600;
+
   letter-spacing: .12em;
+
   text-transform: uppercase;
+
 }
+
+
 
 .milan-auth-card input {
+
   width: 100%;
+
   height: 54px;
+
   padding: 0 16px;
+
   border: 1px solid rgba(100, 30, 50, .16);
+
   border-radius: 0;
+
   outline: 0;
+
   background: #fff;
+
   color: #351520;
+
   transition: border-color .2s ease, box-shadow .2s ease;
+
 }
+
+
 
 .milan-auth-card input::placeholder {
+
   color: #a49498;
+
 }
+
+
 
 .milan-auth-card input:focus {
+
   border-color: #e3be7a;
+
   box-shadow: 0 0 0 3px rgba(227, 190, 122, .16);
+
 }
+
+
 
 .milan-auth-form-row {
+
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 11px;
+
 }
+
+
 
 .milan-auth-password {
+
   position: relative;
+
   display: block;
+
 }
+
+
 
 .milan-auth-password input {
+
   padding-right: 62px;
+
 }
+
+
 
 .milan-auth-password button {
+
   position: absolute;
+
   top: 50%;
+
   right: 12px;
+
   transform: translateY(-50%);
+
   padding: 4px;
+
   border: 0;
+
   background: transparent;
+
   color: var(--wine);
+
   font-size: .67rem;
+
   font-weight: 600;
+
 }
+
+
 
 .milan-auth-options {
+
   margin: 1px 0 19px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   gap: 14px;
+
   color: rgba(255, 246, 236, .77);
+
   font-size: .69rem;
+
 }
+
+
 
 .milan-auth-options>label {
+
   display: flex;
+
   align-items: center;
+
   gap: 7px;
+
 }
+
+
 
 .milan-auth-options input {
+
   width: 14px;
+
   height: 14px;
+
   accent-color: #e4bd77;
+
 }
+
+
 
 .milan-auth-options button,
+
 .milan-auth-change-mode button {
+
   padding: 0;
+
   border: 0;
+
   border-bottom: 1px solid currentColor;
+
   background: transparent;
+
   color: #fff6e8;
+
 }
+
+
 
 .milan-auth-status {
+
   margin: 0 0 13px;
+
   padding: 10px 12px;
+
   font-size: .72rem;
+
   line-height: 1.4;
+
 }
+
+
 
 .milan-auth-status.is-error {
+
   background: #fff0f1;
+
   color: #9c1739;
+
 }
+
+
 
 .milan-auth-status.is-success {
+
   background: #eef8e9;
+
   color: #35723f;
+
 }
+
+
 
 .milan-auth-submit {
+
   width: 100%;
+
   min-height: 58px;
+
   padding: 0 20px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   border: 1px solid #fffaf1;
+
   background: #fffaf1;
+
   color: var(--wine);
+
   font-weight: 600;
-  transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
 }
+
+
 
 .milan-auth-submit:hover:not(:disabled) {
+
   transform: translateY(-2px);
+
   background: #fff;
+
   box-shadow: 0 14px 34px rgba(31, 3, 14, .24);
+
 }
+
+
 
 .milan-auth-submit:disabled {
+
   cursor: wait;
+
   opacity: .65;
+
 }
+
+
 
 .milan-auth-submit b {
+
   font-size: 1.25rem;
+
   font-weight: 400;
+
 }
+
+
 
 .milan-auth-change-mode {
+
   margin: 17px 0 0;
+
   color: rgba(255, 246, 236, .72);
+
   font-size: .72rem;
+
   text-align: center;
+
 }
 
+
+
 @keyframes milanMandalaSpin {
+
   to {
+
     transform: rotate(360deg);
+
   }
+
 }
+
+
 
 @keyframes milanMandalaBreathe {
 
+
+
   0%,
+
   100% {
+
     opacity: .68;
+
     filter: drop-shadow(0 0 8px rgba(194, 143, 62, .08));
+
   }
+
+
 
   50% {
+
     opacity: 1;
+
     filter: drop-shadow(0 0 26px rgba(194, 143, 62, .24));
+
   }
+
 }
+
+
 
 @property --milan-wave-radius {
+
   syntax: "<percentage>";
+
   initial-value: 0%;
+
   inherits: false;
+
 }
+
+
 
 @keyframes milanPatternWave {
+
   0% {
+
     --milan-wave-radius: 0%;
+
     opacity: 0;
+
   }
+
+
 
   7% {
+
     opacity: 1;
+
   }
+
+
 
   88% {
+
     opacity: 1;
+
   }
+
+
 
   100% {
+
     --milan-wave-radius: 104%;
+
     opacity: 0;
+
   }
+
 }
+
+
 
 @keyframes milanStoryReveal {
+
   from {
+
     opacity: 0;
+
     transform: translate(-50%, 16px);
+
   }
 
+
+
   to {
+
     opacity: 1;
+
     transform: translate(-50%, 0);
+
   }
+
 }
+
+
 
 @keyframes milanCardReveal {
+
   from {
+
     opacity: 0;
+
     transform: translateY(18px);
+
   }
+
+
 
   to {
+
     opacity: 1;
+
     transform: translateY(0);
+
   }
+
 }
+
+
 
 @media (max-width: 1080px) {
+
   .milan-auth {
+
     grid-template-columns: 44fr 56fr !important;
+
   }
+
+
 
   .milan-auth-mandala {
+
     left: 50%;
+
     width: 88%;
+
   }
+
+
 
   .milan-auth-story-copy {
+
     left: 50%;
+
     width: 86%;
+
   }
 
+
+
   .milan-auth-story-copy h1 {
+
     font-size: 2.4rem;
+
   }
+
 }
 
+
+
 @media (max-width: 780px) {
+
   .milan-auth {
+
     display: block;
+
     overflow: auto;
+
     background: var(--cream);
+
   }
+
+
 
   .milan-auth-story {
+
     min-height: 390px;
+
   }
+
+
 
   .milan-auth-story::before {
+
     display: none;
+
   }
+
+
 
   .milan-auth-divider {
+
     display: none;
+
   }
+
+
 
   .milan-auth-story::after {
+
     top: auto;
+
     bottom: 0;
+
     width: 100%;
+
     height: 4px;
+
   }
+
+
 
   .milan-auth-logo {
+
     top: 22px;
+
     left: 23px;
+
   }
+
+
 
   .milan-auth-mandala {
+
     top: 47%;
+
     left: 50%;
+
     width: min(78%, 330px);
+
   }
+
+
 
   .milan-auth-story-copy {
+
     left: 50%;
+
     bottom: 18px;
+
     width: min(88%, 420px);
+
     padding: 12px 15px;
+
   }
+
+
 
   .milan-auth-story-copy h1 {
+
     font-size: clamp(1.65rem, 7vw, 2.2rem);
+
   }
+
+
 
   .milan-auth-story-copy>b {
+
     margin: 9px auto 8px;
+
   }
+
+
 
   .milan-auth-story-copy p {
+
     font-size: .42rem;
+
   }
+
+
 
   .milan-auth-panel {
+
     min-height: calc(100svh - 390px);
+
     padding: 72px 20px 34px;
+
   }
+
+
 
   .milan-auth-back {
+
     top: 21px;
+
     right: 21px;
+
   }
 
+
+
   .milan-auth-card {
+
     width: min(100%, 560px);
+
     margin: 0 auto;
+
     padding: 12px 0;
+
+  }
+
+
+
+  .milan-auth-card h2 {
+
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
+
+  }
+
+}
+
+
+
+@media (max-width: 430px) {
+
+  .milan-auth-story {
+
+    min-height: 350px;
+
+  }
+
+
+
+  .milan-auth-mandala {
+
+    left: 50%;
+
+    width: 285px;
+
+  }
+
+
+
+  .milan-auth-story-copy {
+
+    left: 50%;
+
+    width: 91%;
+
+  }
+
+
+
+  .milan-auth-story-copy h1 {
+
+    font-size: 1.75rem;
+
+  }
+
+
+
+  .milan-auth-story-copy p {
+
+    letter-spacing: .1em;
+
+  }
+
+
+
+  .milan-auth-panel {
+
+    min-height: calc(100svh - 350px);
+
+    padding-inline: 16px;
+
+  }
+
+
+
+  .milan-auth-form-row {
+
+    grid-template-columns: 1fr;
+
+    gap: 0;
+
+  }
+
+
+
+  .milan-auth-role-switch button {
+
+    padding-inline: 8px;
+
+  }
+
+
+
+  .milan-auth-options {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+
+  .milan-auth *,
+
+  .milan-auth *::before,
+
+  .milan-auth *::after {
+
+    animation-duration: .01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: .01ms !important;
+
+  }
+
+}
+
+
+/* =========================================================
+   LARGE AUTH FORM — LOGIN AND REGISTRATION
+========================================================= */
+
+@media (min-width: 901px) {
+  .milan-auth-card {
+    width: min(92%, 960px);
   }
 
   .milan-auth-card h2 {
-    font-size: clamp(2.4rem, 11vw, 3.4rem);
+    font-size: clamp(2.85rem, 4vw, 4.5rem);
+  }
+
+  .milan-auth-intro {
+    margin: 16px 0 30px;
+    font-size: .94rem;
+  }
+
+  .milan-auth-role-switch {
+    margin-bottom: 28px;
+  }
+
+  .milan-auth-role-switch button {
+    min-height: 84px;
+    padding: 14px 21px;
+    grid-template-columns: 39px 1fr;
+  }
+
+  .milan-auth-role-switch button>span {
+    font-size: 1.24rem;
+  }
+
+  .milan-auth-role-switch button>b {
+    font-size: .91rem;
+  }
+
+  .milan-auth-role-switch button>small {
+    font-size: .69rem;
+  }
+
+  .milan-auth-card form>label,
+  .milan-auth-form-row>label {
+    margin-bottom: 19px;
+  }
+
+  .milan-auth-card form label>span:first-child {
+    margin-bottom: 9px;
+    font-size: .73rem;
+  }
+
+  .milan-auth-card input {
+    height: 67px;
+    padding: 0 21px;
+    font-size: .97rem;
+  }
+
+  .milan-auth-password input {
+    padding-right: 80px;
+  }
+
+  .milan-auth-password button {
+    right: 18px;
+    font-size: .78rem;
+  }
+
+  .milan-auth-options {
+    margin: 4px 0 25px;
+    font-size: .79rem;
+  }
+
+  .milan-auth-options input {
+    width: 17px;
+    height: 17px;
+  }
+
+  .milan-auth-submit {
+    min-height: 69px;
+    padding: 0 25px;
+    font-size: .98rem;
+  }
+
+  .milan-auth-change-mode {
+    margin-top: 22px;
+    font-size: .81rem;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 900px) {
+  .milan-auth-role-switch button {
+    min-height: 75px;
+  }
+
+  .milan-auth-card input {
+    height: 61px;
+    padding-inline: 18px;
+    font-size: .93rem;
+  }
+
+  .milan-auth-submit {
+    min-height: 63px;
+    font-size: .93rem;
   }
 }
 
 @media (max-width: 430px) {
-  .milan-auth-story {
-    min-height: 350px;
-  }
-
-  .milan-auth-mandala {
-    left: 50%;
-    width: 285px;
-  }
-
-  .milan-auth-story-copy {
-    left: 50%;
-    width: 91%;
-  }
-
-  .milan-auth-story-copy h1 {
-    font-size: 1.75rem;
-  }
-
-  .milan-auth-story-copy p {
-    letter-spacing: .1em;
-  }
-
-  .milan-auth-panel {
-    min-height: calc(100svh - 350px);
-    padding-inline: 16px;
-  }
-
-  .milan-auth-form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
   .milan-auth-role-switch button {
-    padding-inline: 8px;
+    min-height: 67px;
   }
 
-  .milan-auth-options {
-    align-items: flex-start;
-    flex-direction: column;
+  .milan-auth-card input {
+    height: 58px;
+    font-size: .91rem;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-
-  .milan-auth *,
-  .milan-auth *::before,
-  .milan-auth *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+  .milan-auth-submit {
+    min-height: 60px;
+    font-size: .91rem;
   }
 }

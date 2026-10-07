@@ -1,15 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from app.api.vendor_verification import router as vendor_verification_router
-from app.models.vendor_verification_document import VendorVerificationDocument
+
+import os
 
 from app.db.database import engine, Base
-from app.api.admin import router as admin_router
+from app.api.booking_flow import (
+    router as booking_flow_router
+)
 
 
 # =========================================================
 # MODELS
+# Important: Models must be imported before create_all()
 # =========================================================
 
 from app.models.user import User
@@ -20,7 +23,16 @@ from app.models.saved_vendor import SavedVendor
 from app.models.notifications import Notification
 from app.models.review import Review
 from app.models.vendor_verification import VendorVerification
-
+from app.models.booking_payment import BookingPaymentProof
+from app.models.vendor_verification_document import (
+    VendorVerificationDocument
+)
+from app.models.vendor_package import VendorPackage
+from app.models.booking_flow import (
+    EnquiryConversationMessage,
+    EnquiryPriceNegotiation,
+    EnquiryNegotiationAction,
+)
 
 # =========================================================
 # ROUTERS
@@ -31,10 +43,16 @@ from app.api.vendors import router as vendor_router
 from app.api.enquiries import router as enquiry_router
 from app.api.saved_vendors import router as saved_vendors_router
 from app.api.notifications import router as notifications_router
+from app.api.booking_payments import router as booking_payments_router
 from app.api.reviews import router as reviews_router
+from app.api.vendor_verification import (
+    router as vendor_verification_router
+)
+from app.api.admin import router as admin_router
+from app.api.vendor_packages import (
+    router as vendor_packages_router
+)
 from app.api import locations
-
-import os
 
 
 # =========================================================
@@ -103,21 +121,17 @@ app.mount(
 # =========================================================
 
 app.include_router(auth_router)
-
 app.include_router(vendor_router)
-
 app.include_router(enquiry_router)
-
+app.include_router(booking_payments_router)
 app.include_router(locations.router)
-
 app.include_router(saved_vendors_router)
-
 app.include_router(notifications_router)
-
 app.include_router(reviews_router)
 app.include_router(vendor_verification_router)
 app.include_router(admin_router)
-
+app.include_router(vendor_packages_router)
+app.include_router(booking_flow_router)
 
 # =========================================================
 # HOME
@@ -125,7 +139,6 @@ app.include_router(admin_router)
 
 @app.get("/")
 def home():
-
     return {
         "message": "Welcome to Milan API",
         "status": "Running Successfully"

@@ -93,14 +93,34 @@ export default function CustomerRequests() {
                   <div>
                     <p className="milan-request-category">{vendor.category || "Wedding professional"}</p>
                     <h2>{vendor.business_name || "Milan vendor"}</h2>
+                    {request.package_name && (
+                      <p className="milan-request-package">
+                        Package: <strong>{request.package_name}</strong>
+                      </p>
+                    )}
                     {request.wedding_date && <p>Wedding date: {request.wedding_date}</p>}
                     {request.message && <p className="milan-request-message">“{request.message}”</p>}
-                    {vendor.id && (
-                      <button type="button" className="milan-request-vendor-link"
-                        onClick={() => navigate(`/vendors/${vendor.id}`)}>
-                        View vendor →
-                      </button>
-                    )}
+
+                    <div className="milan-request-card-actions">
+                      {vendor.id && (
+                        <button type="button" className="milan-request-vendor-link"
+                          onClick={() => navigate(`/vendors/${vendor.id}`)}>
+                          View vendor →
+                        </button>
+                      )}
+
+                      {status === "accepted" && (
+                        <button
+                          type="button"
+                          className="milan-request-conversation-button"
+                          onClick={() =>
+                            navigate(`/booking-conversation/${request.id}`)
+                          }
+                        >
+                          💬 Continue Conversation
+                        </button>
+                      )}
+                    </div>
                   </div>
                   <span className={`milan-request-status status-${status}`}>
                     {statusLabel(status)}

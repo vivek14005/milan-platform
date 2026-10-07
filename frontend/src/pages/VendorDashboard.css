@@ -18,6 +18,23 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Accepted enquiry conversation button */
+.vendor-enquiry-actions .vendor-conversation-btn {
+  flex: 1;
+  min-height: 44px;
+  padding: 10px 15px;
+  border: 1px solid #681c33;
+  border-radius: 0;
+  background: #681c33;
+  color: #ffffff;
+  font: 700 12px Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.vendor-enquiry-actions .vendor-conversation-btn:hover {
+  background: #4e1427;
+}
+
 .vendor-dashboard-page * {
   box-sizing: border-box;
 }
@@ -144,7 +161,7 @@
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
-  transition: background .2s ease, color .2s ease, transform .2s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .vendor-dashboard-home-btn:first-child {
@@ -440,6 +457,67 @@
   overflow-wrap: anywhere;
 }
 
+/* Package selected by the customer */
+.vendor-enquiry-package {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 13px;
+  margin-top: 11px;
+  padding: 15px 16px;
+  border: 1px solid var(--vd-gold-soft);
+  background:
+    linear-gradient(110deg, rgba(185, 138, 66, .12), transparent 52%),
+    #fffaf0;
+}
+
+.vendor-enquiry-package-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--vd-gold-soft);
+  border-radius: 50%;
+  background: var(--vd-paper);
+  color: var(--vd-gold);
+  font-size: 17px;
+}
+
+.vendor-enquiry-package-info {
+  min-width: 0;
+}
+
+.vendor-enquiry-package-info small {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--vd-gold);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.vendor-enquiry-package-info strong {
+  display: block;
+  color: var(--vd-wine);
+  font: 500 18px/1.2 Georgia, "Times New Roman", serif;
+  overflow-wrap: anywhere;
+}
+
+.vendor-enquiry-package-info span {
+  display: block;
+  margin-top: 4px;
+  color: var(--vd-muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.vendor-enquiry-package-price {
+  color: var(--vd-gold);
+  font: 600 18px/1.2 Georgia, "Times New Roman", serif;
+  white-space: nowrap;
+}
+
 .vendor-enquiry-message {
   flex: 1;
   margin-top: 11px;
@@ -473,7 +551,7 @@
   font-size: 11px;
   font-weight: 800;
   cursor: pointer;
-  transition: background .2s ease, color .2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .vendor-accept-btn,
@@ -624,6 +702,13 @@
 }
 
 @media (max-width: 430px) {
+  .vendor-enquiry-package {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .vendor-enquiry-package-price {
+    grid-column: 2;
+  }
 
   .vendor-dashboard-header>div:last-child,
   .vendor-status-actions,

@@ -1,0 +1,16 @@
+/* Add at the END of VendorDashboard.css */
+
+.vendor-enquiry-actions .vendor-conversation-btn {
+  min-height: 44px;
+  padding: 10px 15px;
+  border: 1px solid #681c33;
+  border-radius: 0;
+  background: #681c33;
+  color: #fff;
+  font: 700 12px Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.vendor-enquiry-actions .vendor-conversation-btn:hover {
+  background: #4e1427;
+}

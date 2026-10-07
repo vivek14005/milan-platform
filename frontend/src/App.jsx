@@ -1,11 +1,13 @@
 import "./App.css";
 import "./pages/VendorHomeTheme.css";
+import VendorPackagesPage from "./pages/VendorPackagesPage";
 import MilanVendorFront from "./pages/MilanVendorFront";
 import VendorClosing from "./pages/VendorClosing";
 import VendorProfileSetup from "./pages/VendorProfileSetup";
 import VendorDetails from "./pages/VendorDetailsPage";
 import VendorDashboard from "./pages/VendorDashboard";
 import VendorVerification from "./pages/VendorVerification";
+import BookingConversationPage from "./pages/BookingConversationPage";
 import { useState, useEffect } from "react";
 import {
   Routes,
@@ -15,8 +17,6 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import "./App.css";
-import "./pages/VendorHomeTheme.css";
 import MilanCustomerHome from "./components/MilanCustomerHome";
 import AuthPage from "./auth/AuthPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -1265,6 +1265,17 @@ function App() {
 
       const role = currentUser?.role?.toString().trim().toLowerCase();
 
+      const conversationNotificationTypes = [
+        "booking_message",
+        "price_proposed",
+        "price_confirmation",
+        "price_finalized",
+        "price_rejected",
+        "payment_proof_submitted",
+        "payment_received",
+        "payment_rejected",
+      ];
+
       if (role === "vendor") {
         if (notification.notification_type === "new_enquiry") {
           navigate("/vendor-dashboard");
@@ -1279,11 +1290,42 @@ function App() {
           return;
         }
 
+        if (
+          conversationNotificationTypes.includes(
+            notification.notification_type
+          ) &&
+          notification.enquiry_id
+        ) {
+          navigate(
+            `/booking-conversation/${notification.enquiry_id}`
+          );
+          return;
+        }
+
         return;
       }
 
-      if (role === "customer" && notification.vendor_id) {
-        navigate(`/vendors/${notification.vendor_id}`);
+      if (role === "customer") {
+        if (
+          conversationNotificationTypes.includes(
+            notification.notification_type
+          ) &&
+          notification.enquiry_id
+        ) {
+          navigate(
+            `/booking-conversation/${notification.enquiry_id}`
+          );
+          return;
+        }
+
+        if (notification.notification_type === "enquiry_status") {
+          navigate("/customer-requests");
+          return;
+        }
+
+        if (notification.vendor_id) {
+          navigate(`/vendors/${notification.vendor_id}`);
+        }
       }
     } catch (error) {
       console.error("Unable to mark notification as read:", error);
@@ -2080,6 +2122,10 @@ function App() {
                 <a href="#services">
                   My Business
                 </a>
+
+                <Link to="/vendor-packages">
+                  Packages
+                </Link>
 
                 <Link to="/vendor-dashboard">
                   Enquiries
@@ -3825,6 +3871,10 @@ function App() {
                   My Business
                 </a>
 
+                <Link to="/vendor-packages">
+                  Packages
+                </Link>
+
                 <Link to="/vendor-dashboard">
                   Enquiries
                 </Link>
@@ -3895,6 +3945,20 @@ function App() {
       onProfile={() => navigate("/profile")}
       onSavedVendors={() => navigate("/saved-vendors")}
       onRequestVendors={() => navigate("/customer-requests")}
+      notifications={notifications}
+      unreadNotificationCount={unreadNotificationCount}
+      notificationsLoading={notificationsLoading}
+      showNotifications={showNotifications}
+      onToggleNotifications={() => {
+        setShowNotifications((previous) => !previous);
+        setShowProfileMenu(false);
+
+        if (!showNotifications) {
+          loadNotifications();
+        }
+      }}
+      onNotificationClick={markNotificationRead}
+      onMarkAllNotificationsRead={markAllNotificationsRead}
       services={services}
       selectedService={selectedService}
       onServiceSelect={handleServiceClick}
@@ -3973,6 +4037,11 @@ function App() {
       />
 
       <Route
+        path="/booking-conversation/:enquiryId"
+        element={isAdmin ? <AdminDashboard /> : <BookingConversationPage />}
+      />
+
+      <Route
         path="/vendors/:vendorId"
         element={isAdmin ? <AdminDashboard /> : <VendorDetails />}
       />
@@ -3992,6 +4061,17 @@ function App() {
       <Route
         path="/vendor-profile-setup"
         element={isAdmin ? <AdminDashboard /> : <VendorProfileSetup />}
+      />
+
+      <Route
+        path="/vendor-packages"
+        element={
+          isAdmin
+            ? <AdminDashboard />
+            : currentUser?.role?.toLowerCase() === "vendor"
+              ? <VendorPackagesPage />
+              : marketplaceHome
+        }
       />
 
       <Route

@@ -6,10 +6,31 @@ from pydantic import BaseModel, field_validator
 
 class EnquiryCreate(BaseModel):
     vendor_id: int
+    package_id: Optional[int] = None
     customer_name: str
     phone: str
     wedding_date: Optional[str] = None
     message: Optional[str] = None
+
+    @field_validator("vendor_id")
+    @classmethod
+    def validate_vendor_id(cls, value):
+        if value <= 0:
+            raise ValueError(
+                "Please select a valid vendor."
+            )
+
+        return value
+
+    @field_validator("package_id")
+    @classmethod
+    def validate_package_id(cls, value):
+        if value is not None and value <= 0:
+            raise ValueError(
+                "Please select a valid package."
+            )
+
+        return value
 
     @field_validator("customer_name")
     @classmethod
@@ -64,10 +85,12 @@ class EnquiryCreate(BaseModel):
             raise ValueError(
                 "Wedding date cannot be in the past."
             )
+
         max_date = today + timedelta(days=365)
+
         if selected_date > max_date:
             raise ValueError(
-                "Wedding date cannot be more than 1 years in the future."
+                "Wedding date cannot be more than 1 year in the future."
             )
 
         return value
@@ -75,3 +98,22 @@ class EnquiryCreate(BaseModel):
 
 class EnquiryStatusUpdate(BaseModel):
     status: str
+
+    @field_validator("status")
+    @classmethod
+    def validate_status(cls, value):
+        value = value.strip().lower()
+
+        allowed_statuses = {
+            "pending",
+            "accepted",
+            "rejected",
+            "completed",
+        }
+
+        if value not in allowed_statuses:
+            raise ValueError(
+                "Invalid enquiry status."
+            )
+
+        return value

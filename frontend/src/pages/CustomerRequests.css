@@ -251,3 +251,37 @@
     padding: 23px;
   }
 }
+
+/* Add at the END of CustomerRequests.css */
+
+.milan-request-package strong {
+  color: #681c33;
+}
+
+.milan-request-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 17px;
+  border-top: 1px solid #e6d7c0;
+}
+
+.milan-request-card-actions .milan-request-vendor-link {
+  margin: 0;
+}
+
+.milan-request-conversation-button {
+  min-height: 42px;
+  padding: 10px 15px;
+  border: 1px solid #681c33;
+  border-radius: 0;
+  background: #681c33;
+  color: #fff;
+  font: 700 12px Arial, Helvetica, sans-serif;
+}
+
+.milan-request-conversation-button:hover {
+  background: #4e1427;
+}

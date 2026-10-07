@@ -1,0 +1,775 @@
+.vendor-packages-page {
+  min-height: 100svh;
+  background: #fbf8f0;
+  color: #361d25;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.vendor-packages-page * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.vendor-packages-topbar {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 0 clamp(22px, 5vw, 78px);
+
+  background: rgba(251, 248, 240, 0.96);
+  border-bottom: 1px solid rgba(104, 28, 51, 0.17);
+}
+
+.vendor-packages-logo {
+  padding: 0;
+  border: 0;
+  background: none;
+
+  color: #681c33;
+  font: 600 36px Georgia, "Times New Roman", serif;
+  letter-spacing: -0.04em;
+
+  cursor: pointer;
+}
+
+.vendor-packages-logo span {
+  color: #b98a42;
+}
+
+.vendor-packages-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 35px);
+}
+
+.vendor-packages-nav button {
+  min-height: 42px;
+  padding: 0;
+
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+
+  color: #681c33;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.vendor-packages-nav button:hover,
+.vendor-packages-nav button.active {
+  border-bottom-color: #b98a42;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.vendor-packages-main {
+  width: min(1280px, calc(100% - 44px));
+  margin: 0 auto;
+
+  padding:
+    clamp(65px, 8vw, 110px) 0 110px;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.vendor-packages-heading {
+  max-width: 910px;
+  margin: 0 auto clamp(50px, 7vw, 85px);
+  text-align: center;
+}
+
+.vendor-packages-heading>p {
+  margin: 0 0 19px;
+
+  color: #906e46;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.vendor-packages-heading h1 {
+  margin: 0;
+
+  color: #681c33;
+  font:
+    500 clamp(44px, 6vw, 76px) / 1.02 Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing: -0.05em;
+}
+
+.vendor-packages-heading h1 em {
+  display: block;
+  color: #b98a42;
+  font-weight: 400;
+}
+
+.vendor-packages-heading>span {
+  display: block;
+  max-width: 650px;
+  margin: 25px auto 0;
+
+  color: #78616a;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.vendor-packages-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(320px, 0.76fr) minmax(0, 1.24fr);
+
+  gap: clamp(25px, 4vw, 55px);
+  align-items: start;
+}
+
+
+/* =========================================================
+   PACKAGE FORM
+========================================================= */
+
+.vendor-package-form-card {
+  position: sticky;
+  top: 25px;
+
+  padding: clamp(27px, 4vw, 45px);
+
+  border: 1px solid #d8b987;
+  background: #fffdf7;
+
+  box-shadow:
+    12px 12px 0 rgba(185, 138, 66, 0.1);
+}
+
+.vendor-package-form-heading {
+  margin-bottom: 28px;
+}
+
+.vendor-package-form-heading>span {
+  color: #906e46;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.vendor-package-form-heading h2 {
+  margin: 11px 0 8px;
+
+  color: #681c33;
+  font:
+    500 clamp(29px, 3vw, 41px) / 1.1 Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing: -0.035em;
+}
+
+.vendor-package-form-heading p {
+  margin: 0;
+
+  color: #78616a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.vendor-package-form-card form {
+  display: grid;
+  gap: 19px;
+}
+
+.vendor-package-form-card label:not(.vendor-package-active-field) {
+  display: grid;
+  gap: 8px;
+
+  color: #681c33;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.vendor-package-form-card input,
+.vendor-package-form-card textarea {
+  width: 100%;
+  min-height: 48px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #d8c7b1;
+  border-radius: 0;
+  outline: none;
+
+  background: #fffefa;
+  color: #361d25;
+
+  font: 14px Arial, Helvetica, sans-serif;
+}
+
+.vendor-package-form-card textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.vendor-package-form-card input:focus,
+.vendor-package-form-card textarea:focus {
+  border-color: #b98a42;
+
+  box-shadow:
+    0 0 0 2px rgba(185, 138, 66, 0.12);
+}
+
+.vendor-package-form-card label small {
+  color: #89777d;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.vendor-package-price-input {
+  position: relative;
+}
+
+.vendor-package-price-input>span {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  z-index: 1;
+
+  transform: translateY(-50%);
+
+  color: #906e46;
+  font:
+    500 17px Georgia,
+    "Times New Roman",
+    serif;
+}
+
+.vendor-package-price-input input {
+  padding-left: 34px;
+}
+
+
+/* =========================================================
+   ACTIVE CHECKBOX
+========================================================= */
+
+.vendor-package-active-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 15px;
+
+  border: 1px solid #e6d7c0;
+  background: #f9f3e9;
+
+  cursor: pointer;
+}
+
+.vendor-package-active-field input {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  margin: 2px 0 0;
+
+  accent-color: #681c33;
+}
+
+.vendor-package-active-field>span {
+  display: grid;
+  gap: 5px;
+}
+
+.vendor-package-active-field strong {
+  color: #681c33;
+  font-size: 13px;
+}
+
+.vendor-package-active-field small {
+  color: #78616a;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.vendor-package-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 3px;
+}
+
+.vendor-package-form-actions button {
+  min-height: 49px;
+  padding: 0 19px;
+
+  border-radius: 0;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.vendor-package-save {
+  flex: 1;
+
+  border: 1px solid #681c33;
+  background: #681c33;
+  color: #ffffff;
+}
+
+.vendor-package-save:hover {
+  background: #4e1427;
+}
+
+.vendor-package-cancel {
+  border: 1px solid #d8b987;
+  background: transparent;
+  color: #681c33;
+}
+
+.vendor-package-form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.vendor-package-message {
+  margin-bottom: 20px;
+  padding: 13px 15px;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.vendor-package-message.error {
+  border: 1px solid #e8c1c6;
+  background: #fff0f1;
+  color: #9e2638;
+}
+
+.vendor-package-message.success {
+  border: 1px solid #bedcca;
+  background: #eef9f2;
+  color: #276143;
+}
+
+
+/* =========================================================
+   PACKAGE LIST
+========================================================= */
+
+.vendor-package-list-section {
+  min-width: 0;
+}
+
+.vendor-package-list-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #d8b987;
+}
+
+.vendor-package-list-heading span {
+  color: #906e46;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.vendor-package-list-heading h2 {
+  margin: 9px 0 0;
+
+  color: #681c33;
+  font:
+    500 clamp(30px, 4vw, 46px) / 1 Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing: -0.04em;
+}
+
+.vendor-package-list-heading>strong {
+  color: #b98a42;
+  font:
+    500 25px Georgia,
+    "Times New Roman",
+    serif;
+}
+
+
+/* =========================================================
+   STATES
+========================================================= */
+
+.vendor-package-state,
+.vendor-package-empty {
+  padding: 55px 30px;
+
+  border: 1px solid #e6d7c0;
+  background: #fffdf7;
+
+  text-align: center;
+  color: #78616a;
+}
+
+.vendor-package-empty>div {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+
+  margin: 0 auto 20px;
+
+  border: 1px solid #d8b987;
+  border-radius: 50%;
+
+  color: #b98a42;
+  font:
+    500 25px Georgia,
+    "Times New Roman",
+    serif;
+}
+
+.vendor-package-empty h3 {
+  margin: 0 0 10px;
+
+  color: #681c33;
+  font:
+    500 27px Georgia,
+    "Times New Roman",
+    serif;
+}
+
+.vendor-package-empty p {
+  max-width: 430px;
+  margin: 0 auto;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   PACKAGE CARDS
+========================================================= */
+
+.vendor-package-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.vendor-package-card {
+  min-width: 0;
+  min-height: 360px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 28px;
+
+  border: 1px solid #d8b987;
+  background: #fffdf7;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.vendor-package-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    10px 12px 0 rgba(185, 138, 66, 0.1);
+}
+
+.vendor-package-card.inactive {
+  opacity: 0.66;
+  border-color: #d9ced1;
+}
+
+.vendor-package-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.vendor-package-card-top>span {
+  padding: 7px 9px;
+
+  border: 1px solid #d8b987;
+  background: #f7f0e3;
+
+  color: #906e46;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.vendor-package-card.inactive .vendor-package-card-top>span {
+  border-color: #d9ced1;
+  background: #f3edef;
+  color: #78616a;
+}
+
+.vendor-package-card-top>strong {
+  color: #b98a42;
+  font:
+    500 24px Georgia,
+    "Times New Roman",
+    serif;
+}
+
+.vendor-package-card h3 {
+  margin: 27px 0 12px;
+
+  color: #681c33;
+  font:
+    500 29px / 1.1 Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.vendor-package-description {
+  margin: 0 0 20px;
+
+  color: #78616a;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.vendor-package-card ul {
+  display: grid;
+  gap: 11px;
+
+  margin: 0 0 25px;
+  padding: 0;
+
+  list-style: none;
+}
+
+.vendor-package-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+
+  color: #59464d;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.vendor-package-card li span {
+  color: #b98a42;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+========================================================= */
+
+.vendor-package-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: auto;
+  padding-top: 19px;
+
+  border-top: 1px solid #e6d7c0;
+}
+
+.vendor-package-card-actions button {
+  min-height: 38px;
+  padding: 0 14px;
+
+  border: 1px solid #d8b987;
+  background: transparent;
+
+  color: #681c33;
+  font-size: 11px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.vendor-package-card-actions button:hover {
+  background: #f7f0e3;
+}
+
+.vendor-package-card-actions button.delete {
+  margin-left: auto;
+
+  border-color: #e1c0c4;
+  color: #a92e41;
+}
+
+.vendor-package-card-actions button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 970px) {
+  .vendor-packages-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .vendor-package-form-card {
+    position: static;
+  }
+}
+
+
+@media (max-width: 680px) {
+  .vendor-packages-topbar {
+    min-height: 76px;
+  }
+
+  .vendor-packages-logo {
+    font-size: 29px;
+  }
+
+  .vendor-packages-nav button:nth-child(1) {
+    display: none;
+  }
+
+  .vendor-packages-nav {
+    gap: 15px;
+  }
+
+  .vendor-packages-nav button {
+    font-size: 11px;
+  }
+
+  .vendor-packages-main {
+    width: min(100% - 30px, 1280px);
+    padding-top: 55px;
+  }
+
+  .vendor-package-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vendor-package-form-card {
+    padding: 25px 20px;
+
+    box-shadow:
+      7px 7px 0 rgba(185, 138, 66, 0.1);
+  }
+}
+
+
+@media (max-width: 430px) {
+  .vendor-packages-nav button.active {
+    display: none;
+  }
+
+  .vendor-packages-heading h1 {
+    font-size: 43px;
+  }
+
+  .vendor-package-form-actions {
+    flex-direction: column;
+  }
+
+  .vendor-package-card {
+    padding: 23px 20px;
+  }
+}
+
+/* Vendor packages top navigation size */
+.vendor-packages-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.vendor-packages-nav button {
+  min-height: 48px !important;
+  padding: 12px 18px !important;
+  border: 0;
+  background: transparent;
+  color: #681c33;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.vendor-packages-nav button:hover {
+  color: #b98a42;
+}
+
+.vendor-packages-nav button.active {
+  color: #681c33;
+  border-bottom: 2px solid #b98a42;
+}
+
+/* Slightly larger navbar */
+.vendor-packages-topbar {
+  min-height: 86px !important;
+  padding-inline: clamp(24px, 4vw, 64px) !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .vendor-packages-topbar {
+    min-height: auto !important;
+    padding: 18px 20px !important;
+  }
+
+  .vendor-packages-nav {
+    gap: 4px;
+  }
+
+  .vendor-packages-nav button {
+    min-height: 42px !important;
+    padding: 9px 8px !important;
+    font-size: 12px !important;
+  }
+}

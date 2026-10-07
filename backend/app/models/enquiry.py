@@ -1,4 +1,11 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+)
+
 from app.db.database import Base
 
 
@@ -21,6 +28,26 @@ class Enquiry(Base):
         Integer,
         ForeignKey("vendors.id"),
         nullable=False
+    )
+
+    package_id = Column(
+        Integer,
+        ForeignKey(
+            "vendor_packages.id",
+            ondelete="SET NULL"
+        ),
+        nullable=True,
+        index=True
+    )
+
+    package_name = Column(
+        String(100),
+        nullable=True
+    )
+
+    package_price = Column(
+        Integer,
+        nullable=True
     )
 
     customer_name = Column(
