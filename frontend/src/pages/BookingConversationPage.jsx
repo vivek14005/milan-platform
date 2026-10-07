@@ -787,6 +787,16 @@ export default function BookingConversationPage() {
               </section>
             )}
 
+            {priceLocked && (
+              <button
+                type="button"
+                className="milan-view-receipt-button"
+                onClick={() => navigate(`/booking-receipt/${enquiryId}`)}
+              >
+                View Booking Receipt
+              </button>
+            )}
+
             {Array.isArray(flow.price_history) &&
               flow.price_history.length > 0 && (
                 <details className="milan-conversation-history">

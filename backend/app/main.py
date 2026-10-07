@@ -37,7 +37,6 @@ from app.models.booking_flow import (
 # =========================================================
 # ROUTERS
 # =========================================================
-
 from app.api.auth import router as auth_router
 from app.api.vendors import router as vendor_router
 from app.api.enquiries import router as enquiry_router
@@ -51,6 +50,9 @@ from app.api.vendor_verification import (
 from app.api.admin import router as admin_router
 from app.api.vendor_packages import (
     router as vendor_packages_router
+)
+from app.api.booking_receipts import (
+    router as booking_receipts_router
 )
 from app.api import locations
 
@@ -123,6 +125,7 @@ app.mount(
 app.include_router(auth_router)
 app.include_router(vendor_router)
 app.include_router(enquiry_router)
+app.include_router(booking_receipts_router)
 app.include_router(booking_payments_router)
 app.include_router(locations.router)
 app.include_router(saved_vendors_router)

@@ -5,9 +5,12 @@ import MilanVendorFront from "./pages/MilanVendorFront";
 import VendorClosing from "./pages/VendorClosing";
 import VendorProfileSetup from "./pages/VendorProfileSetup";
 import VendorDetails from "./pages/VendorDetailsPage";
-import VendorDashboard from "./pages/VendorDashboard";
 import VendorVerification from "./pages/VendorVerification";
 import BookingConversationPage from "./pages/BookingConversationPage";
+import VendorDashboard from "./pages/VendorDashboard";
+import BookingReceiptPage from "./pages/BookingReceiptPage";
+
+
 import { useState, useEffect } from "react";
 import {
   Routes,
@@ -4001,6 +4004,10 @@ function App() {
 
   return (
     <Routes>
+      <Route
+        path="/booking-receipt/:enquiryId"
+        element={isAdmin ? <AdminDashboard /> : <BookingReceiptPage />}
+      />
 
       {/* ADMIN:
           Never show the customer/vendor marketplace homepage to admin.

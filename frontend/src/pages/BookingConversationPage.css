@@ -910,6 +910,22 @@
   color: #9f3848;
 }
 
+.milan-view-receipt-button {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 14px;
+  border: 1px solid #681c33;
+  background: #fffdf7;
+  color: #681c33;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.milan-view-receipt-button:hover {
+  background: #681c33;
+  color: #ffffff;
+}
+
 @media (max-width: 860px) {
   .milan-conversation-layout {
     grid-template-columns: 1fr;
